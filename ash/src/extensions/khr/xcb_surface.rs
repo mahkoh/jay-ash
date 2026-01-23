@@ -1,8 +1,8 @@
 //! <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_KHR_xcb_surface.html>
 
+use crate::RawPtr;
 use crate::prelude::*;
 use crate::vk;
-use crate::RawPtr;
 use core::mem;
 
 impl crate::khr::xcb_surface::Instance {

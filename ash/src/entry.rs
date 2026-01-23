@@ -1,9 +1,9 @@
+use crate::RawPtr;
 use crate::instance::Instance;
 #[cfg(doc)]
 use crate::khr;
 use crate::prelude::*;
 use crate::vk;
-use crate::RawPtr;
 use alloc::vec::Vec;
 use core::ffi;
 use core::fmt;
@@ -356,7 +356,7 @@ impl fmt::Display for MissingEntryPoint {
 impl std::error::Error for MissingEntryPoint {}
 
 #[cfg(feature = "linked")]
-extern "system" {
+unsafe extern "system" {
     fn vkGetInstanceProcAddr(
         instance: vk::Instance,
         name: *const ffi::c_char,

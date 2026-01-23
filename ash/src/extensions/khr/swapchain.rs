@@ -1,10 +1,10 @@
 //! <https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_KHR_swapchain.html>
 
+use crate::RawPtr;
 #[cfg(doc)]
 use crate::khr;
 use crate::prelude::*;
 use crate::vk;
-use crate::RawPtr;
 use alloc::vec::Vec;
 use core::mem;
 

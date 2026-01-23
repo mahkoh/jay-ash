@@ -11,11 +11,11 @@ jobs:
       - run: cargo check --workspace --all-targets --all-features
 
   check_msrv:
-    name: Check ash MSRV (1.69.0)
+    name: Check ash MSRV (1.90.0)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.69.0
+      - uses: dtolnay/rust-toolchain@1.90.0
       - name: Check ash
         run: cargo check -p ash --all-features
       - name: Check ash with no_std

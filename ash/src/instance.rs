@@ -1,9 +1,9 @@
 #[cfg(doc)]
 use super::Entry;
+use crate::RawPtr;
 use crate::device::Device;
 use crate::prelude::*;
 use crate::vk;
-use crate::RawPtr;
 use alloc::vec::Vec;
 use core::ffi;
 use core::mem;

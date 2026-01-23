@@ -5,7 +5,7 @@ use crate::vk::enums::*;
 use crate::vk::native::*;
 use crate::vk::platform_types::*;
 use crate::vk::prelude::*;
-use crate::vk::{ptr_chain_iter, Handle};
+use crate::vk::{Handle, ptr_chain_iter};
 use core::ffi::*;
 use core::fmt;
 use core::marker::PhantomData;
@@ -402,7 +402,11 @@ handle_nondispatchable!(
     doc =
         "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorSet.html>"
 );
-handle_nondispatchable ! (DescriptorSetLayout , DESCRIPTOR_SET_LAYOUT , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorSetLayout.html>") ;
+handle_nondispatchable!(
+    DescriptorSetLayout,
+    DESCRIPTOR_SET_LAYOUT,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorSetLayout.html>"
+);
 handle_nondispatchable!(
     DescriptorPool,
     DESCRIPTOR_POOL,
@@ -445,16 +449,56 @@ handle_nondispatchable!(
     doc =
         "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPipelineCache.html>"
 );
-handle_nondispatchable ! (IndirectCommandsLayoutNV , INDIRECT_COMMANDS_LAYOUT_NV , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutNV.html>") ;
-handle_nondispatchable ! (DescriptorUpdateTemplate , DESCRIPTOR_UPDATE_TEMPLATE , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplate.html>") ;
-handle_nondispatchable ! (SamplerYcbcrConversion , SAMPLER_YCBCR_CONVERSION , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrConversion.html>") ;
-handle_nondispatchable ! (ValidationCacheEXT , VALIDATION_CACHE_EXT , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkValidationCacheEXT.html>") ;
-handle_nondispatchable ! (AccelerationStructureKHR , ACCELERATION_STRUCTURE_KHR , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureKHR.html>") ;
-handle_nondispatchable ! (AccelerationStructureNV , ACCELERATION_STRUCTURE_NV , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureNV.html>") ;
-handle_nondispatchable ! (PerformanceConfigurationINTEL , PERFORMANCE_CONFIGURATION_INTEL , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPerformanceConfigurationINTEL.html>") ;
-handle_nondispatchable ! (BufferCollectionFUCHSIA , BUFFER_COLLECTION_FUCHSIA , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkBufferCollectionFUCHSIA.html>") ;
-handle_nondispatchable ! (DeferredOperationKHR , DEFERRED_OPERATION_KHR , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeferredOperationKHR.html>") ;
-handle_nondispatchable ! (PrivateDataSlot , PRIVATE_DATA_SLOT , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPrivateDataSlot.html>") ;
+handle_nondispatchable!(
+    IndirectCommandsLayoutNV,
+    INDIRECT_COMMANDS_LAYOUT_NV,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutNV.html>"
+);
+handle_nondispatchable!(
+    DescriptorUpdateTemplate,
+    DESCRIPTOR_UPDATE_TEMPLATE,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorUpdateTemplate.html>"
+);
+handle_nondispatchable!(
+    SamplerYcbcrConversion,
+    SAMPLER_YCBCR_CONVERSION,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrConversion.html>"
+);
+handle_nondispatchable!(
+    ValidationCacheEXT,
+    VALIDATION_CACHE_EXT,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkValidationCacheEXT.html>"
+);
+handle_nondispatchable!(
+    AccelerationStructureKHR,
+    ACCELERATION_STRUCTURE_KHR,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureKHR.html>"
+);
+handle_nondispatchable!(
+    AccelerationStructureNV,
+    ACCELERATION_STRUCTURE_NV,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAccelerationStructureNV.html>"
+);
+handle_nondispatchable!(
+    PerformanceConfigurationINTEL,
+    PERFORMANCE_CONFIGURATION_INTEL,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPerformanceConfigurationINTEL.html>"
+);
+handle_nondispatchable!(
+    BufferCollectionFUCHSIA,
+    BUFFER_COLLECTION_FUCHSIA,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkBufferCollectionFUCHSIA.html>"
+);
+handle_nondispatchable!(
+    DeferredOperationKHR,
+    DEFERRED_OPERATION_KHR,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeferredOperationKHR.html>"
+);
+handle_nondispatchable!(
+    PrivateDataSlot,
+    PRIVATE_DATA_SLOT,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPrivateDataSlot.html>"
+);
 handle_nondispatchable!(
     CuModuleNVX,
     CU_MODULE_NVX,
@@ -466,7 +510,11 @@ handle_nondispatchable!(
     doc =
         "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkCuFunctionNVX.html>"
 );
-handle_nondispatchable ! (OpticalFlowSessionNV , OPTICAL_FLOW_SESSION_NV , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowSessionNV.html>") ;
+handle_nondispatchable!(
+    OpticalFlowSessionNV,
+    OPTICAL_FLOW_SESSION_NV,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkOpticalFlowSessionNV.html>"
+);
 handle_nondispatchable!(
     MicromapEXT,
     MICROMAP_EXT,
@@ -498,10 +546,26 @@ handle_nondispatchable!(
     SWAPCHAIN_KHR,
     doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSwapchainKHR.html>"
 );
-handle_nondispatchable ! (DebugReportCallbackEXT , DEBUG_REPORT_CALLBACK_EXT , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDebugReportCallbackEXT.html>") ;
-handle_nondispatchable ! (DebugUtilsMessengerEXT , DEBUG_UTILS_MESSENGER_EXT , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDebugUtilsMessengerEXT.html>") ;
-handle_nondispatchable ! (VideoSessionKHR , VIDEO_SESSION_KHR , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkVideoSessionKHR.html>") ;
-handle_nondispatchable ! (VideoSessionParametersKHR , VIDEO_SESSION_PARAMETERS_KHR , doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkVideoSessionParametersKHR.html>") ;
+handle_nondispatchable!(
+    DebugReportCallbackEXT,
+    DEBUG_REPORT_CALLBACK_EXT,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDebugReportCallbackEXT.html>"
+);
+handle_nondispatchable!(
+    DebugUtilsMessengerEXT,
+    DEBUG_UTILS_MESSENGER_EXT,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDebugUtilsMessengerEXT.html>"
+);
+handle_nondispatchable!(
+    VideoSessionKHR,
+    VIDEO_SESSION_KHR,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkVideoSessionKHR.html>"
+);
+handle_nondispatchable!(
+    VideoSessionParametersKHR,
+    VIDEO_SESSION_PARAMETERS_KHR,
+    doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkVideoSessionParametersKHR.html>"
+);
 #[allow(non_camel_case_types)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/PFN_vkInternalAllocationNotification.html>"]
 pub type PFN_vkInternalAllocationNotification = Option<
