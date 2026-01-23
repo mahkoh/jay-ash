@@ -12,7 +12,7 @@ publish = false
 bindgen = "=0.69.4"
 heck = "0.5"
 itertools = "0.12"
-nom = "7.1"
+nom = "8"
 proc-macro2 = "1.0"
 quote = "1.0"
 regex = "1.4"
