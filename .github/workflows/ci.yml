@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@1.90.0
+      - uses: dtolnay/rust-toolchain@1.100.0
       - name: Check ash
         run: cargo check -p jay-ash --all-features
       - name: Check ash with no_std
