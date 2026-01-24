@@ -1319,22 +1319,35 @@ pub fn generate_extension_commands<'a>(
         true => format_ident!("_{}", extension_ident.to_lowercase()),
     };
 
-    let name_ident = format_ident!("{}_NAME", extension_name.to_uppercase());
-    let spec_version_ident = format_ident!("{}_SPEC_VERSION", extension_name.to_uppercase());
-    let spec_version = items
+    let name_ident = items
         .iter()
         .filter_map(get_variant!(vk_parse::ExtensionChild::Require { items }))
         .flatten()
         .filter_map(get_variant!(vk_parse::InterfaceItem::Enum))
-        .find(|e| e.name.contains("SPEC_VERSION"))
-        .and_then(|e| {
+        .filter(|e| e.name.ends_with("_EXTENSION_NAME"))
+        .find(|e| matches!(e.spec, vk_parse::EnumSpec::Value { .. }))
+        .map(|e| constant_ident(&e.name))
+        .unwrap();
+    let (spec_version_ident, spec_version) = items
+        .iter()
+        .filter_map(get_variant!(vk_parse::ExtensionChild::Require { items }))
+        .flatten()
+        .filter_map(get_variant!(vk_parse::InterfaceItem::Enum))
+        .filter(|e| e.name.ends_with("_SPEC_VERSION"))
+        .find_map(|e| {
             if let vk_parse::EnumSpec::Value { value, .. } = &e.spec {
-                let v: u32 = str::parse(value).unwrap();
-                Some(quote!(pub const #spec_version_ident: u32 = #v;))
+                Some((e, value))
             } else {
                 None
             }
-        });
+        })
+        .map(|(e, value)| {
+            let v: u32 = str::parse(value).unwrap();
+            let name = constant_ident(&e.name);
+            let constant = quote!(pub const #name: u32 = #v;);
+            (name, constant)
+        })
+        .unwrap();
 
     let mut instance_commands = Vec::new();
     let mut device_commands = Vec::new();
@@ -2937,6 +2950,10 @@ pub fn constant_name(name: &str) -> &str {
     name.strip_prefix("VK_").unwrap_or(name)
 }
 
+pub fn constant_ident(name: &str) -> Ident {
+    format_ident!("{}", constant_name(name))
+}
+
 pub fn generate_constant<'a>(
     constant: &'a vkxml::Constant,
     cache: &mut HashSet<&'a str>,
@@ -3280,7 +3297,26 @@ pub fn write_source_code<P: AsRef<Path>>(vk_headers_dir: &Path, src_dir: P) {
         .map(|constant| generate_constant(constant, &mut const_cache))
         .collect();
 
-    constants_code.push(quote! { pub const SHADER_UNUSED_NV : u32 = SHADER_UNUSED_KHR;});
+    extensions
+        .iter()
+        .flat_map(|extension| &extension.children)
+        .filter_map(get_variant!(vk_parse::FeatureChild::Require { api, items }))
+        .filter_map(|(api, items)| api.is_vulkan_api().then_some(items))
+        .flatten()
+        .filter_map(get_variant!(vk_parse::InterfaceItem::Enum))
+        .filter(|e| e.api.is_vulkan_api())
+        .filter_map(|e| match &e.spec {
+            vk_parse::EnumSpec::Alias {
+                alias,
+                extends: None,
+            } => Some((e, alias)),
+            _ => None,
+        })
+        .for_each(|(e, alias)| {
+            let name = constant_ident(&e.name);
+            let alias = constant_ident(alias);
+            constants_code.push(quote! { pub use super::#alias as #name;});
+        });
 
     let union_types = definitions
         .iter()
