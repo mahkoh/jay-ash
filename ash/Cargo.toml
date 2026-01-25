@@ -9,7 +9,7 @@ authors = [
 ]
 description = "Vulkan bindings for Rust"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/mahkoh/ash"
+repository = "https://github.com/mahkoh/jay-ash"
 readme = "../README.md"
 keywords = ["gamedev", "graphics", "vulkan", "bindings"]
 categories = [
