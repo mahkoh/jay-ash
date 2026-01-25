@@ -445,8 +445,9 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "vk-parse"
-version = "0.18.0"
-source = "git+https://github.com/krolli/vk-parse.git?rev=fd40bd8a929c1b60bd89716d7affddc30d1cedb3#fd40bd8a929c1b60bd89716d7affddc30d1cedb3"
+version = "0.19.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e9944e42f0877cfff58ce506a9e7462d18ed15a765df48ceefd95397734b33bb"
 dependencies = [
  "vkxml",
  "xml-rs",
