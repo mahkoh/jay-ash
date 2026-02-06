@@ -15,7 +15,7 @@ itertools = "0.14"
 nom = "8"
 proc-macro2 = "1.0"
 quote = "1.0"
-regex = "1.4"
+regex = "1.12"
 vk-parse = { version = "0.19.0", features = ["vkxml-convert"] }
 vkxml = "0.3"
 linearize = { version = "0.1.5", features = ["derive"] }
