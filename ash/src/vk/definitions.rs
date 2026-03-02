@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 341;
+pub const HEADER_VERSION: u32 = 344;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -161,6 +161,11 @@ vk_bitflags_wrapped!(AndroidSurfaceCreateFlagsKHR, Flags);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkViSurfaceCreateFlagsNN.html>"]
 pub struct ViSurfaceCreateFlagsNN(pub(crate) Flags);
 vk_bitflags_wrapped!(ViSurfaceCreateFlagsNN, Flags);
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkUbmSurfaceCreateFlagsSEC.html>"]
+pub struct UbmSurfaceCreateFlagsSEC(pub(crate) Flags);
+vk_bitflags_wrapped!(UbmSurfaceCreateFlagsSEC, Flags);
 #[repr(transparent)]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkWin32SurfaceCreateFlagsKHR.html>"]
@@ -9308,6 +9313,54 @@ impl<'a> WaylandSurfaceCreateInfoKHR<'a> {
     }
     #[inline]
     pub fn surface(mut self, surface: *mut wl_surface) -> Self {
+        self.surface = surface;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkUbmSurfaceCreateInfoSEC.html>"]
+#[must_use]
+pub struct UbmSurfaceCreateInfoSEC<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub flags: UbmSurfaceCreateFlagsSEC,
+    pub device: *mut ubm_device,
+    pub surface: *mut ubm_surface,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for UbmSurfaceCreateInfoSEC<'_> {}
+unsafe impl Sync for UbmSurfaceCreateInfoSEC<'_> {}
+impl ::core::default::Default for UbmSurfaceCreateInfoSEC<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            flags: UbmSurfaceCreateFlagsSEC::default(),
+            device: ::core::ptr::null_mut(),
+            surface: ::core::ptr::null_mut(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for UbmSurfaceCreateInfoSEC<'a> {
+    const STRUCTURE_TYPE: StructureType = StructureType::UBM_SURFACE_CREATE_INFO_SEC;
+}
+impl<'a> UbmSurfaceCreateInfoSEC<'a> {
+    #[inline]
+    pub fn flags(mut self, flags: UbmSurfaceCreateFlagsSEC) -> Self {
+        self.flags = flags;
+        self
+    }
+    #[inline]
+    pub fn device(mut self, device: &'a mut ubm_device) -> Self {
+        self.device = device;
+        self
+    }
+    #[inline]
+    pub fn surface(mut self, surface: &'a mut ubm_surface) -> Self {
         self.surface = surface;
         self
     }
@@ -63169,6 +63222,46 @@ impl<'a> PhysicalDeviceCooperativeMatrixPropertiesKHR<'a> {
 #[repr(C)]
 #[cfg_attr(feature = "debug", derive(Debug))]
 #[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM.html>"]
+#[must_use]
+pub struct PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub cooperative_matrix_conversion: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'_> {}
+unsafe impl Sync for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'_> {}
+impl ::core::default::Default for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            cooperative_matrix_conversion: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'_>
+{
+}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'_> {}
+impl<'a> PhysicalDeviceCooperativeMatrixConversionFeaturesQCOM<'a> {
+    #[inline]
+    pub fn cooperative_matrix_conversion(mut self, cooperative_matrix_conversion: bool) -> Self {
+        self.cooperative_matrix_conversion = cooperative_matrix_conversion.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderEnqueuePropertiesAMDX.html>"]
 #[must_use]
 pub struct PhysicalDeviceShaderEnqueuePropertiesAMDX<'a> {
@@ -68245,6 +68338,83 @@ impl<'a> PhysicalDeviceShaderUniformBufferUnsizedArrayFeaturesEXT<'a> {
         shader_uniform_buffer_unsized_array: bool,
     ) -> Self {
         self.shader_uniform_buffer_unsized_array = shader_uniform_buffer_unsized_array.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE.html>"]
+#[must_use]
+pub struct PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub shader_mixed_float_dot_product_float16_acc_float32: Bool32,
+    pub shader_mixed_float_dot_product_float16_acc_float16: Bool32,
+    pub shader_mixed_float_dot_product_b_float16_acc: Bool32,
+    pub shader_mixed_float_dot_product_float8_acc_float32: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'_> {}
+unsafe impl Sync for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'_> {}
+impl ::core::default::Default for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            shader_mixed_float_dot_product_float16_acc_float32: Bool32::default(),
+            shader_mixed_float_dot_product_float16_acc_float16: Bool32::default(),
+            shader_mixed_float_dot_product_b_float16_acc: Bool32::default(),
+            shader_mixed_float_dot_product_float8_acc_float32: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'_>
+{
+}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'_> {}
+impl<'a> PhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE<'a> {
+    #[inline]
+    pub fn shader_mixed_float_dot_product_float16_acc_float32(
+        mut self,
+        shader_mixed_float_dot_product_float16_acc_float32: bool,
+    ) -> Self {
+        self.shader_mixed_float_dot_product_float16_acc_float32 =
+            shader_mixed_float_dot_product_float16_acc_float32.into();
+        self
+    }
+    #[inline]
+    pub fn shader_mixed_float_dot_product_float16_acc_float16(
+        mut self,
+        shader_mixed_float_dot_product_float16_acc_float16: bool,
+    ) -> Self {
+        self.shader_mixed_float_dot_product_float16_acc_float16 =
+            shader_mixed_float_dot_product_float16_acc_float16.into();
+        self
+    }
+    #[inline]
+    pub fn shader_mixed_float_dot_product_b_float16_acc(
+        mut self,
+        shader_mixed_float_dot_product_b_float16_acc: bool,
+    ) -> Self {
+        self.shader_mixed_float_dot_product_b_float16_acc =
+            shader_mixed_float_dot_product_b_float16_acc.into();
+        self
+    }
+    #[inline]
+    pub fn shader_mixed_float_dot_product_float8_acc_float32(
+        mut self,
+        shader_mixed_float_dot_product_float8_acc_float32: bool,
+    ) -> Self {
+        self.shader_mixed_float_dot_product_float8_acc_float32 =
+            shader_mixed_float_dot_product_float8_acc_float32.into();
         self
     }
 }

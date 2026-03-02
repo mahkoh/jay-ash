@@ -46,3 +46,5 @@ pub type MTLSharedEvent_id = *mut c_void;
 pub type MTLTexture_id = *mut c_void;
 pub type OHNativeWindow = c_void;
 pub type OH_NativeBuffer = c_void;
+pub type ubm_device = c_void;
+pub type ubm_surface = c_void;

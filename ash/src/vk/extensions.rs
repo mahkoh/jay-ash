@@ -1693,6 +1693,11 @@ impl SubpassDescriptionFlags {
     pub const FRAGMENT_REGION_QCOM: Self = Self::FRAGMENT_REGION_EXT;
     pub const SHADER_RESOLVE_QCOM: Self = Self::CUSTOM_RESOLVE_EXT;
 }
+#[doc = "Generated from 'VK_QCOM_cooperative_matrix_conversion'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM: Self =
+        Self(1_000_172_000);
+}
 #[doc = "Generated from 'VK_EXT_global_priority'"]
 impl QueueGlobalPriority {
     pub const LOW_EXT: Self = Self::LOW;
@@ -3928,6 +3933,9 @@ impl DescriptorType {
 #[doc = "Generated from 'VK_ARM_tensors'"]
 impl Format {
     pub const R8_BOOL_ARM: Self = Self(1_000_460_000);
+    pub const R16_SFLOAT_FPENCODING_BFLOAT16_ARM: Self = Self(1_000_460_001);
+    pub const R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM: Self = Self(1_000_460_002);
+    pub const R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM: Self = Self(1_000_460_003);
 }
 #[doc = "Generated from 'VK_ARM_tensors'"]
 impl FormatFeatureFlags2 {
@@ -5317,6 +5325,15 @@ impl StructureType {
 #[doc = "Generated from 'VK_EXT_shader_subgroup_partitioned'"]
 impl SubgroupFeatureFlags {
     pub const PARTITIONED_EXT: Self = Self(0b1_0000_0000);
+}
+#[doc = "Generated from 'VK_SEC_ubm_surface'"]
+impl StructureType {
+    pub const UBM_SURFACE_CREATE_INFO_SEC: Self = Self(1_000_664_000);
+}
+#[doc = "Generated from 'VK_VALVE_shader_mixed_float_dot_product'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
+        Self(1_000_673_000);
 }
 pub const KHR_SURFACE_EXTENSION_NAME: &CStr = c"VK_KHR_surface";
 pub const KHR_SURFACE_SPEC_VERSION: u32 = 25u32;
@@ -7104,6 +7121,9 @@ pub const EXT_FILTER_CUBIC_SPEC_VERSION: u32 = 3u32;
 pub const QCOM_RENDER_PASS_SHADER_RESOLVE_EXTENSION_NAME: &CStr =
     c"VK_QCOM_render_pass_shader_resolve";
 pub const QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION: u32 = 4u32;
+pub const QCOM_COOPERATIVE_MATRIX_CONVERSION_EXTENSION_NAME: &CStr =
+    c"VK_QCOM_cooperative_matrix_conversion";
+pub const QCOM_COOPERATIVE_MATRIX_CONVERSION_SPEC_VERSION: u32 = 1u32;
 pub const EXT_GLOBAL_PRIORITY_EXTENSION_NAME: &CStr = c"VK_EXT_global_priority";
 pub const EXT_GLOBAL_PRIORITY_SPEC_VERSION: u32 = 2u32;
 pub const KHR_SHADER_SUBGROUP_EXTENDED_TYPES_EXTENSION_NAME: &CStr =
@@ -8812,7 +8832,7 @@ pub const EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION: u32 = 2u32;
 pub const LUNARG_DIRECT_DRIVER_LOADING_EXTENSION_NAME: &CStr = c"VK_LUNARG_direct_driver_loading";
 pub const LUNARG_DIRECT_DRIVER_LOADING_SPEC_VERSION: u32 = 1u32;
 pub const ARM_TENSORS_EXTENSION_NAME: &CStr = c"VK_ARM_tensors";
-pub const ARM_TENSORS_SPEC_VERSION: u32 = 1u32;
+pub const ARM_TENSORS_SPEC_VERSION: u32 = 2u32;
 #[allow(non_camel_case_types)]
 pub type PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM = unsafe extern "system" fn(
     physical_device: PhysicalDevice,
@@ -9618,3 +9638,21 @@ pub type PFN_vkCmdSetComputeOccupancyPriorityNV = unsafe extern "system" fn(
 pub const EXT_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME: &CStr =
     c"VK_EXT_shader_subgroup_partitioned";
 pub const EXT_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION: u32 = 1u32;
+pub const SEC_UBM_SURFACE_EXTENSION_NAME: &CStr = c"VK_SEC_ubm_surface";
+pub const SEC_UBM_SURFACE_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkCreateUbmSurfaceSEC = unsafe extern "system" fn(
+    instance: crate::vk::Instance,
+    p_create_info: *const UbmSurfaceCreateInfoSEC<'_>,
+    p_allocator: *const AllocationCallbacks<'_>,
+    p_surface: *mut SurfaceKHR,
+) -> Result;
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "system" fn(
+    physical_device: PhysicalDevice,
+    queue_family_index: u32,
+    device: *mut ubm_device,
+) -> Bool32;
+pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME: &CStr =
+    c"VK_VALVE_shader_mixed_float_dot_product";
+pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION: u32 = 1u32;
