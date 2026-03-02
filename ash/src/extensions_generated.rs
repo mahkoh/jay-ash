@@ -23672,6 +23672,14 @@ pub mod qcom {
             crate::vk::QCOM_RENDER_PASS_SHADER_RESOLVE_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_QCOM_cooperative_matrix_conversion"]
+    pub mod cooperative_matrix_conversion {
+        use super::super::*;
+        pub use {
+            crate::vk::QCOM_COOPERATIVE_MATRIX_CONVERSION_EXTENSION_NAME as NAME,
+            crate::vk::QCOM_COOPERATIVE_MATRIX_CONVERSION_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
     #[doc = "VK_QCOM_render_pass_transform"]
     pub mod render_pass_transform {
         use super::super::*;
@@ -24222,6 +24230,97 @@ pub mod sec {
             crate::vk::SEC_PIPELINE_CACHE_INCREMENTAL_MODE_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_SEC_ubm_surface"]
+    pub mod ubm_surface {
+        use super::super::*;
+        pub use {
+            crate::vk::SEC_UBM_SURFACE_EXTENSION_NAME as NAME,
+            crate::vk::SEC_UBM_SURFACE_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_SEC_ubm_surface instance-level functions"]
+        #[derive(Clone)]
+        pub struct Instance {
+            pub(crate) fp: InstanceFn,
+            pub(crate) handle: crate::vk::Instance,
+        }
+        impl Instance {
+            pub fn new(entry: &crate::Entry, instance: &crate::Instance) -> Self {
+                let handle = instance.handle();
+                let fp = InstanceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        entry.get_instance_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &InstanceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn instance(&self) -> crate::vk::Instance {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_SEC_ubm_surface instance-level function pointers"]
+        pub struct InstanceFn {
+            pub create_ubm_surface_sec: PFN_vkCreateUbmSurfaceSEC,
+            pub get_physical_device_ubm_presentation_support_sec:
+                PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC,
+        }
+        unsafe impl Send for InstanceFn {}
+        unsafe impl Sync for InstanceFn {}
+        impl InstanceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    create_ubm_surface_sec: unsafe {
+                        unsafe extern "system" fn create_ubm_surface_sec(
+                            _instance: crate::vk::Instance,
+                            _p_create_info: *const UbmSurfaceCreateInfoSEC<'_>,
+                            _p_allocator: *const AllocationCallbacks<'_>,
+                            _p_surface: *mut SurfaceKHR,
+                        ) -> Result {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(create_ubm_surface_sec)
+                            ))
+                        }
+                        let val = _f(c"vkCreateUbmSurfaceSEC");
+                        if val.is_null() {
+                            create_ubm_surface_sec
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkCreateUbmSurfaceSEC>(val)
+                        }
+                    },
+                    get_physical_device_ubm_presentation_support_sec: unsafe {
+                        unsafe extern "system" fn get_physical_device_ubm_presentation_support_sec(
+                            _physical_device: PhysicalDevice,
+                            _queue_family_index: u32,
+                            _device: *mut ubm_device,
+                        ) -> Bool32 {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_physical_device_ubm_presentation_support_sec)
+                            ))
+                        }
+                        let val = _f(c"vkGetPhysicalDeviceUbmPresentationSupportSEC");
+                        if val.is_null() {
+                            get_physical_device_ubm_presentation_support_sec
+                        } else {
+                            ::core::mem::transmute::<
+                                *const c_void,
+                                PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC,
+                            >(val)
+                        }
+                    },
+                }
+            }
+        }
+    }
 }
 #[doc = "Extensions tagged VALVE"]
 pub mod valve {
@@ -24340,6 +24439,14 @@ pub mod valve {
         pub use {
             crate::vk::VALVE_FRAGMENT_DENSITY_MAP_LAYERED_EXTENSION_NAME as NAME,
             crate::vk::VALVE_FRAGMENT_DENSITY_MAP_LAYERED_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
+    #[doc = "VK_VALVE_shader_mixed_float_dot_product"]
+    pub mod shader_mixed_float_dot_product {
+        use super::super::*;
+        pub use {
+            crate::vk::VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME as NAME,
+            crate::vk::VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION as SPEC_VERSION,
         };
     }
 }

@@ -2691,6 +2691,13 @@ impl fmt::Debug for Format {
             Self::ASTC_6X6X6_SRGB_BLOCK_EXT => Some("ASTC_6X6X6_SRGB_BLOCK_EXT"),
             Self::ASTC_6X6X6_SFLOAT_BLOCK_EXT => Some("ASTC_6X6X6_SFLOAT_BLOCK_EXT"),
             Self::R8_BOOL_ARM => Some("R8_BOOL_ARM"),
+            Self::R16_SFLOAT_FPENCODING_BFLOAT16_ARM => Some("R16_SFLOAT_FPENCODING_BFLOAT16_ARM"),
+            Self::R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM => {
+                Some("R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM")
+            }
+            Self::R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM => {
+                Some("R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM")
+            }
             Self::R16G16_SFIXED5_NV => Some("R16G16_SFIXED5_NV"),
             Self::R10X6_UINT_PACK16_ARM => Some("R10X6_UINT_PACK16_ARM"),
             Self::R10X6G10X6_UINT_2PACK16_ARM => Some("R10X6G10X6_UINT_2PACK16_ARM"),
@@ -6521,6 +6528,9 @@ impl fmt::Debug for StructureType {
             Self::FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT => {
                 Some("FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT")
             }
+            Self::PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM => {
+                Some("PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM")
+            }
             Self::IMPORT_MEMORY_HOST_POINTER_INFO_EXT => {
                 Some("IMPORT_MEMORY_HOST_POINTER_INFO_EXT")
             }
@@ -8098,6 +8108,10 @@ impl fmt::Debug for StructureType {
             Self::PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT => {
                 Some("PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT")
             }
+            Self::UBM_SURFACE_CREATE_INFO_SEC => Some("UBM_SURFACE_CREATE_INFO_SEC"),
+            Self::PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE => {
+                Some("PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE")
+            }
             Self::BIND_BUFFER_MEMORY_INFO => Some("BIND_BUFFER_MEMORY_INFO"),
             Self::BIND_IMAGE_MEMORY_INFO => Some("BIND_IMAGE_MEMORY_INFO"),
             Self::MEMORY_DEDICATED_REQUIREMENTS => Some("MEMORY_DEDICATED_REQUIREMENTS"),
@@ -8219,6 +8233,7 @@ impl fmt::Debug for StructureType {
             Self::PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES => {
                 Some("PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES")
             }
+            Self::PHYSICAL_DEVICE_DRIVER_PROPERTIES => Some("PHYSICAL_DEVICE_DRIVER_PROPERTIES"),
             Self::PHYSICAL_DEVICE_VULKAN_1_1_FEATURES => {
                 Some("PHYSICAL_DEVICE_VULKAN_1_1_FEATURES")
             }
@@ -8232,7 +8247,6 @@ impl fmt::Debug for StructureType {
                 Some("PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES")
             }
             Self::IMAGE_FORMAT_LIST_CREATE_INFO => Some("IMAGE_FORMAT_LIST_CREATE_INFO"),
-            Self::PHYSICAL_DEVICE_DRIVER_PROPERTIES => Some("PHYSICAL_DEVICE_DRIVER_PROPERTIES"),
             Self::PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES => {
                 Some("PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES")
             }
@@ -8867,6 +8881,12 @@ impl fmt::Debug for ToolPurposeFlags {
             ),
             (ToolPurposeFlags::DEBUG_MARKERS_EXT.0, "DEBUG_MARKERS_EXT"),
         ];
+        debug_flags(f, KNOWN, self.0)
+    }
+}
+impl fmt::Debug for UbmSurfaceCreateFlagsSEC {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        const KNOWN: &[(Flags, &str)] = &[];
         debug_flags(f, KNOWN, self.0)
     }
 }
