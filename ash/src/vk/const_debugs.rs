@@ -2433,6 +2433,10 @@ impl fmt::Debug for ExternalSemaphoreHandleTypeFlags {
                 ExternalSemaphoreHandleTypeFlags::ZIRCON_EVENT_FUCHSIA.0,
                 "ZIRCON_EVENT_FUCHSIA",
             ),
+            (
+                ExternalSemaphoreHandleTypeFlags::DRM_SYNCOBJ_EXT.0,
+                "DRM_SYNCOBJ_EXT",
+            ),
         ];
         debug_flags(f, KNOWN, self.0)
     }

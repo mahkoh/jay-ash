@@ -5335,6 +5335,10 @@ impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
         Self(1_000_673_000);
 }
+#[doc = "Generated from 'VK_EXT_external_semaphore_drm_syncobj'"]
+impl ExternalSemaphoreHandleTypeFlags {
+    pub const DRM_SYNCOBJ_EXT: Self = Self(0b1_0000_0000);
+}
 pub const KHR_SURFACE_EXTENSION_NAME: &CStr = c"VK_KHR_surface";
 pub const KHR_SURFACE_SPEC_VERSION: u32 = 25u32;
 #[allow(non_camel_case_types)]
@@ -9656,3 +9660,6 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME: &CStr =
     c"VK_VALVE_shader_mixed_float_dot_product";
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION: u32 = 1u32;
+pub const EXT_EXTERNAL_SEMAPHORE_DRM_SYNCOBJ_EXTENSION_NAME: &CStr =
+    c"VK_EXT_external_semaphore_drm_syncobj";
+pub const EXT_EXTERNAL_SEMAPHORE_DRM_SYNCOBJ_SPEC_VERSION: u32 = 1u32;

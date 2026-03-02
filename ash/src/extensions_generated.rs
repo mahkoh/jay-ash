@@ -10492,6 +10492,14 @@ pub mod ext {
             crate::vk::EXT_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_EXT_external_semaphore_drm_syncobj"]
+    pub mod external_semaphore_drm_syncobj {
+        use super::super::*;
+        pub use {
+            crate::vk::EXT_EXTERNAL_SEMAPHORE_DRM_SYNCOBJ_EXTENSION_NAME as NAME,
+            crate::vk::EXT_EXTERNAL_SEMAPHORE_DRM_SYNCOBJ_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged FUCHSIA"]
 pub mod fuchsia {
