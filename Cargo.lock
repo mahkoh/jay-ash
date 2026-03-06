@@ -208,9 +208,9 @@ dependencies = [
 
 [[package]]
 name = "linearize"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53d5b35550da9461fb8d3acf71c9925afae570bfc45a11857b55138d25c8604d"
+checksum = "f6e1430c89633736996fd763822abd252e395dbccaaee33be601b4d59678a93e"
 dependencies = [
  "cfg-if",
  "linearize-derive",
