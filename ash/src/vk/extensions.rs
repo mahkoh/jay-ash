@@ -2151,6 +2151,10 @@ impl MemoryPropertyFlags {
 impl StructureType {
     pub const PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD: Self = Self(1_000_229_000);
 }
+#[doc = "Generated from 'VK_KHR_shader_constant_data'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_SHADER_CONSTANT_DATA_FEATURES_KHR: Self = Self(1_000_231_000);
+}
 #[doc = "Generated from 'VK_KHR_dynamic_rendering_local_read'"]
 impl ImageLayout {
     pub const RENDERING_LOCAL_READ_KHR: Self = Self::RENDERING_LOCAL_READ;
@@ -2163,6 +2167,12 @@ impl StructureType {
         Self::RENDERING_ATTACHMENT_LOCATION_INFO;
     pub const RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR: Self =
         Self::RENDERING_INPUT_ATTACHMENT_INDEX_INFO;
+}
+#[doc = "Generated from 'VK_KHR_shader_abort'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_SHADER_ABORT_FEATURES_KHR: Self = Self(1_000_233_000);
+    pub const DEVICE_FAULT_SHADER_ABORT_MESSAGE_INFO_KHR: Self = Self(1_000_233_001);
+    pub const PHYSICAL_DEVICE_SHADER_ABORT_PROPERTIES_KHR: Self = Self(1_000_233_002);
 }
 #[doc = "Generated from 'VK_EXT_shader_image_atomic_int64'"]
 impl StructureType {
@@ -2773,6 +2783,12 @@ impl StructureType {
 impl AttachmentStoreOp {
     pub const NONE_QCOM: Self = Self::NONE;
 }
+#[doc = "Generated from 'VK_QCOM_queue_perf_hint'"]
+impl StructureType {
+    pub const PERF_HINT_INFO_QCOM: Self = Self(1_000_302_000);
+    pub const PHYSICAL_DEVICE_QUEUE_PERF_HINT_FEATURES_QCOM: Self = Self(1_000_302_001);
+    pub const PHYSICAL_DEVICE_QUEUE_PERF_HINT_PROPERTIES_QCOM: Self = Self(1_000_302_002);
+}
 #[doc = "Generated from 'VK_NV_cuda_kernel_launch'"]
 impl DebugReportObjectTypeEXT {
     pub const CUDA_MODULE_NV: Self = Self(1_000_307_000);
@@ -3221,6 +3237,16 @@ impl Format {
 #[doc = "Generated from 'VK_EXT_4444_formats'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: Self = Self(1_000_340_000);
+}
+#[doc = "Generated from 'VK_EXT_device_fault'"]
+impl DeviceFaultAddressTypeKHR {
+    pub const NONE_EXT: Self = Self::NONE;
+    pub const READ_INVALID_EXT: Self = Self::READ_INVALID;
+    pub const WRITE_INVALID_EXT: Self = Self::WRITE_INVALID;
+    pub const EXECUTE_INVALID_EXT: Self = Self::EXECUTE_INVALID;
+    pub const INSTRUCTION_POINTER_UNKNOWN_EXT: Self = Self::INSTRUCTION_POINTER_UNKNOWN;
+    pub const INSTRUCTION_POINTER_INVALID_EXT: Self = Self::INSTRUCTION_POINTER_INVALID;
+    pub const INSTRUCTION_POINTER_FAULT_EXT: Self = Self::INSTRUCTION_POINTER_FAULT;
 }
 #[doc = "Generated from 'VK_EXT_device_fault'"]
 impl StructureType {
@@ -3721,6 +3747,9 @@ impl StructureType {
     pub const DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM: Self = Self(1_000_417_000);
     pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM: Self = Self(1_000_417_001);
     pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM: Self = Self(1_000_417_002);
+    pub const DISPATCH_PARAMETERS_ARM: Self = Self(1_000_417_003);
+    pub const PHYSICAL_DEVICE_SCHEDULING_CONTROLS_DISPATCH_PARAMETERS_PROPERTIES_ARM: Self =
+        Self(1_000_417_004);
 }
 #[doc = "Generated from 'VK_EXT_image_sliced_view_of_3d'"]
 impl StructureType {
@@ -4521,6 +4550,10 @@ impl StructureType {
 impl TensorUsageFlagsARM {
     pub const DATA_GRAPH: Self = Self(0b10_0000);
 }
+#[doc = "Generated from 'VK_ARM_data_graph_instruction_set_tosa'"]
+impl StructureType {
+    pub const QUEUE_FAMILY_DATA_GRAPH_TOSA_PROPERTIES_ARM: Self = Self(1_000_508_000);
+}
 #[doc = "Generated from 'VK_QCOM_multiview_per_view_render_areas'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM: Self =
@@ -5032,6 +5065,13 @@ impl StructureType {
     pub const GENERATED_COMMANDS_PIPELINE_INFO_EXT: Self = Self(1_000_572_013);
     pub const GENERATED_COMMANDS_SHADER_INFO_EXT: Self = Self(1_000_572_014);
 }
+#[doc = "Generated from 'VK_KHR_device_fault'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_FAULT_FEATURES_KHR: Self = Self(1_000_573_000);
+    pub const PHYSICAL_DEVICE_FAULT_PROPERTIES_KHR: Self = Self(1_000_573_001);
+    pub const DEVICE_FAULT_INFO_KHR: Self = Self(1_000_573_002);
+    pub const DEVICE_FAULT_DEBUG_INFO_KHR: Self = Self(1_000_573_003);
+}
 #[doc = "Generated from 'VK_KHR_maintenance8'"]
 impl DependencyFlags {
     pub const QUEUE_FAMILY_OWNERSHIP_TRANSFER_USE_ALL_STAGES_KHR: Self = Self(0b10_0000);
@@ -5375,6 +5415,10 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
         Self(1_000_673_000);
+}
+#[doc = "Generated from 'VK_EXT_primitive_restart_index'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT: Self = Self(1_000_678_000);
 }
 pub const KHR_SURFACE_EXTENSION_NAME: &CStr = c"VK_KHR_surface";
 pub const KHR_SURFACE_SPEC_VERSION: u32 = 25u32;
@@ -7071,7 +7115,7 @@ pub type PFN_vkDestroyAccelerationStructureNV = unsafe extern "system" fn(
 pub type PFN_vkGetAccelerationStructureMemoryRequirementsNV = unsafe extern "system" fn(
     device: crate::vk::Device,
     p_info: *const AccelerationStructureMemoryRequirementsInfoNV<'_>,
-    p_memory_requirements: *mut MemoryRequirements2KHR<'_>,
+    p_memory_requirements: *mut MemoryRequirements2<'_>,
 );
 #[allow(non_camel_case_types)]
 pub type PFN_vkBindAccelerationStructureMemoryNV = unsafe extern "system" fn(
@@ -7468,6 +7512,8 @@ pub const AMD_SHADER_CORE_PROPERTIES_2_EXTENSION_NAME: &CStr = c"VK_AMD_shader_c
 pub const AMD_SHADER_CORE_PROPERTIES_2_SPEC_VERSION: u32 = 1u32;
 pub const AMD_DEVICE_COHERENT_MEMORY_EXTENSION_NAME: &CStr = c"VK_AMD_device_coherent_memory";
 pub const AMD_DEVICE_COHERENT_MEMORY_SPEC_VERSION: u32 = 1u32;
+pub const KHR_SHADER_CONSTANT_DATA_EXTENSION_NAME: &CStr = c"VK_KHR_shader_constant_data";
+pub const KHR_SHADER_CONSTANT_DATA_SPEC_VERSION: u32 = 1u32;
 pub const KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION_NAME: &CStr =
     c"VK_KHR_dynamic_rendering_local_read";
 pub const KHR_DYNAMIC_RENDERING_LOCAL_READ_SPEC_VERSION: u32 = 1u32;
@@ -7481,6 +7527,8 @@ pub type PFN_vkCmdSetRenderingInputAttachmentIndices = unsafe extern "system" fn
     command_buffer: CommandBuffer,
     p_input_attachment_index_info: *const RenderingInputAttachmentIndexInfo<'_>,
 );
+pub const KHR_SHADER_ABORT_EXTENSION_NAME: &CStr = c"VK_KHR_shader_abort";
+pub const KHR_SHADER_ABORT_SPEC_VERSION: u32 = 1u32;
 pub const EXT_SHADER_IMAGE_ATOMIC_INT64_EXTENSION_NAME: &CStr = c"VK_EXT_shader_image_atomic_int64";
 pub const EXT_SHADER_IMAGE_ATOMIC_INT64_SPEC_VERSION: u32 = 1u32;
 pub const KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME: &CStr = c"VK_KHR_shader_quad_control";
@@ -7931,6 +7979,13 @@ pub const NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME: &CStr = c"VK_NV_device_di
 pub const NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION: u32 = 2u32;
 pub const QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME: &CStr = c"VK_QCOM_render_pass_store_ops";
 pub const QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION: u32 = 2u32;
+pub const QCOM_QUEUE_PERF_HINT_EXTENSION_NAME: &CStr = c"VK_QCOM_queue_perf_hint";
+pub const QCOM_QUEUE_PERF_HINT_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkQueueSetPerfHintQCOM = unsafe extern "system" fn(
+    queue: Queue,
+    p_perf_hint_info: *const PerfHintInfoQCOM<'_>,
+) -> Result;
 pub const NV_CUDA_KERNEL_LAUNCH_EXTENSION_NAME: &CStr = c"VK_NV_cuda_kernel_launch";
 pub const NV_CUDA_KERNEL_LAUNCH_SPEC_VERSION: u32 = 2u32;
 #[allow(non_camel_case_types)]
@@ -8511,7 +8566,7 @@ pub const EXT_PIPELINE_PROPERTIES_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]
 pub type PFN_vkGetPipelinePropertiesEXT = unsafe extern "system" fn(
     device: crate::vk::Device,
-    p_pipeline_info: *const PipelineInfoEXT<'_>,
+    p_pipeline_info: *const PipelineInfoKHR<'_>,
     p_pipeline_properties: *mut BaseOutStructure<'_>,
 ) -> Result;
 pub const EXT_FRAME_BOUNDARY_EXTENSION_NAME: &CStr = c"VK_EXT_frame_boundary";
@@ -8748,7 +8803,12 @@ pub const ARM_SHADER_CORE_PROPERTIES_SPEC_VERSION: u32 = 1u32;
 pub const KHR_SHADER_SUBGROUP_ROTATE_EXTENSION_NAME: &CStr = c"VK_KHR_shader_subgroup_rotate";
 pub const KHR_SHADER_SUBGROUP_ROTATE_SPEC_VERSION: u32 = 2u32;
 pub const ARM_SCHEDULING_CONTROLS_EXTENSION_NAME: &CStr = c"VK_ARM_scheduling_controls";
-pub const ARM_SCHEDULING_CONTROLS_SPEC_VERSION: u32 = 1u32;
+pub const ARM_SCHEDULING_CONTROLS_SPEC_VERSION: u32 = 2u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkCmdSetDispatchParametersARM = unsafe extern "system" fn(
+    command_buffer: CommandBuffer,
+    p_dispatch_parameters: *const DispatchParametersARM<'_>,
+);
 pub const EXT_IMAGE_SLICED_VIEW_OF_3D_EXTENSION_NAME: &CStr = c"VK_EXT_image_sliced_view_of_3d";
 pub const EXT_IMAGE_SLICED_VIEW_OF_3D_SPEC_VERSION: u32 = 1u32;
 pub const VALVE_DESCRIPTOR_SET_HOST_MAPPING_EXTENSION_NAME: &CStr =
@@ -9430,6 +9490,17 @@ pub type PFN_vkGetDataGraphPipelinePropertiesARM = unsafe extern "system" fn(
     properties_count: u32,
     p_properties: *mut DataGraphPipelinePropertyQueryResultARM<'_>,
 ) -> Result;
+pub const ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_EXTENSION_NAME: &CStr =
+    c"VK_ARM_data_graph_instruction_set_tosa";
+pub const ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM =
+    unsafe extern "system" fn(
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+        p_queue_family_data_graph_properties: *const QueueFamilyDataGraphPropertiesARM<'_>,
+        p_properties: *mut BaseOutStructure<'_>,
+    ) -> Result;
 pub const QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_EXTENSION_NAME: &CStr =
     c"VK_QCOM_multiview_per_view_render_areas";
 pub const QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_SPEC_VERSION: u32 = 1u32;
@@ -9690,6 +9761,20 @@ pub type PFN_vkUpdateIndirectExecutionSetShaderEXT = unsafe extern "system" fn(
     execution_set_write_count: u32,
     p_execution_set_writes: *const WriteIndirectExecutionSetShaderEXT<'_>,
 );
+pub const KHR_DEVICE_FAULT_EXTENSION_NAME: &CStr = c"VK_KHR_device_fault";
+pub const KHR_DEVICE_FAULT_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetDeviceFaultReportsKHR = unsafe extern "system" fn(
+    device: crate::vk::Device,
+    timeout: u64,
+    p_fault_counts: *mut u32,
+    p_fault_info: *mut DeviceFaultInfoKHR<'_>,
+) -> Result;
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetDeviceFaultDebugInfoKHR = unsafe extern "system" fn(
+    device: crate::vk::Device,
+    p_debug_info: *mut DeviceFaultDebugInfoKHR<'_>,
+) -> Result;
 pub const KHR_MAINTENANCE_8_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance8";
 pub const KHR_MAINTENANCE_8_SPEC_VERSION: u32 = 1u32;
 pub const MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION_NAME: &CStr = c"VK_MESA_image_alignment_control";
@@ -9874,3 +9959,8 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME: &CStr =
     c"VK_VALVE_shader_mixed_float_dot_product";
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION: u32 = 1u32;
+pub const EXT_PRIMITIVE_RESTART_INDEX_EXTENSION_NAME: &CStr = c"VK_EXT_primitive_restart_index";
+pub const EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkCmdSetPrimitiveRestartIndexEXT =
+    unsafe extern "system" fn(command_buffer: CommandBuffer, primitive_restart_index: u32);

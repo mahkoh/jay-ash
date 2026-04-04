@@ -2950,9 +2950,9 @@ impl DepthBiasRepresentationEXT {
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
-#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultAddressTypeEXT.html>"]
-pub struct DeviceFaultAddressTypeEXT(pub(crate) i32);
-impl DeviceFaultAddressTypeEXT {
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultAddressTypeKHR.html>"]
+pub struct DeviceFaultAddressTypeKHR(pub(crate) i32);
+impl DeviceFaultAddressTypeKHR {
     #[inline]
     pub const fn from_raw(x: i32) -> Self {
         Self(x)
@@ -2962,7 +2962,7 @@ impl DeviceFaultAddressTypeEXT {
         self.0
     }
 }
-impl DeviceFaultAddressTypeEXT {
+impl DeviceFaultAddressTypeKHR {
     #[doc = "Currently unused"]
     pub const NONE: Self = Self(0);
     pub const READ_INVALID: Self = Self(1);
@@ -2974,9 +2974,9 @@ impl DeviceFaultAddressTypeEXT {
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
-#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultVendorBinaryHeaderVersionEXT.html>"]
-pub struct DeviceFaultVendorBinaryHeaderVersionEXT(pub(crate) i32);
-impl DeviceFaultVendorBinaryHeaderVersionEXT {
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultVendorBinaryHeaderVersionKHR.html>"]
+pub struct DeviceFaultVendorBinaryHeaderVersionKHR(pub(crate) i32);
+impl DeviceFaultVendorBinaryHeaderVersionKHR {
     #[inline]
     pub const fn from_raw(x: i32) -> Self {
         Self(x)
@@ -2986,8 +2986,9 @@ impl DeviceFaultVendorBinaryHeaderVersionEXT {
         self.0
     }
 }
-impl DeviceFaultVendorBinaryHeaderVersionEXT {
+impl DeviceFaultVendorBinaryHeaderVersionKHR {
     pub const ONE: Self = Self(1);
+    pub const ONE_EXT: Self = Self::ONE;
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
@@ -3436,6 +3437,26 @@ impl DataGraphModelCacheTypeQCOM {
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPerfHintTypeQCOM.html>"]
+pub struct PerfHintTypeQCOM(pub(crate) i32);
+impl PerfHintTypeQCOM {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl PerfHintTypeQCOM {
+    pub const DEFAULT: Self = Self(0);
+    pub const FREQUENCY_MIN: Self = Self(1);
+    pub const FREQUENCY_MAX: Self = Self(2);
+    pub const FREQUENCY_SCALED: Self = Self(3);
+}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorMappingSourceEXT.html>"]
 pub struct DescriptorMappingSourceEXT(pub(crate) i32);
 impl DescriptorMappingSourceEXT {
@@ -3457,6 +3478,24 @@ impl DescriptorMappingSourceEXT {
     pub const PUSH_DATA: Self = Self(5);
     pub const PUSH_ADDRESS: Self = Self(6);
     pub const INDIRECT_ADDRESS: Self = Self(7);
+}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphTOSALevelARM.html>"]
+pub struct DataGraphTOSALevelARM(pub(crate) i32);
+impl DataGraphTOSALevelARM {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl DataGraphTOSALevelARM {
+    pub const NONE: Self = Self(0);
+    pub const TYPE_8K: Self = Self(1);
 }
 impl fmt::Debug for ObjectType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

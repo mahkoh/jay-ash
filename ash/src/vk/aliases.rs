@@ -52,6 +52,7 @@ pub type LineRasterizationModeKHR = LineRasterizationMode;
 pub type LineRasterizationModeEXT = LineRasterizationMode;
 pub type PipelineRobustnessBufferBehaviorEXT = PipelineRobustnessBufferBehavior;
 pub type PipelineRobustnessImageBehaviorEXT = PipelineRobustnessImageBehavior;
+pub type DeviceFaultVendorBinaryHeaderVersionEXT = DeviceFaultVendorBinaryHeaderVersionKHR;
 pub type ScopeNV = ScopeKHR;
 pub type ComponentTypeNV = ComponentTypeKHR;
 pub type TessellationDomainOriginKHR = TessellationDomainOrigin;
@@ -60,6 +61,7 @@ pub type SamplerYcbcrRangeKHR = SamplerYcbcrRange;
 pub type ChromaLocationKHR = ChromaLocation;
 pub type SamplerReductionModeEXT = SamplerReductionMode;
 pub type ShaderFloatControlsIndependenceKHR = ShaderFloatControlsIndependence;
+pub type DeviceFaultAddressTypeEXT = DeviceFaultAddressTypeKHR;
 pub type DriverIdKHR = DriverId;
 pub type BufferUsageFlags2CreateInfoKHR<'a> = BufferUsageFlags2CreateInfo<'a>;
 pub type CopyMemoryIndirectCommandNV = CopyMemoryIndirectCommandKHR;
@@ -366,6 +368,9 @@ pub type PhysicalDevicePipelineRobustnessPropertiesEXT<'a> =
     PhysicalDevicePipelineRobustnessProperties<'a>;
 pub type PhysicalDeviceDepthClampZeroOneFeaturesEXT<'a> =
     PhysicalDeviceDepthClampZeroOneFeaturesKHR<'a>;
+pub type DeviceFaultAddressInfoEXT = DeviceFaultAddressInfoKHR;
+pub type DeviceFaultVendorInfoEXT = DeviceFaultVendorInfoKHR;
+pub type DeviceFaultVendorBinaryHeaderVersionOneEXT = DeviceFaultVendorBinaryHeaderVersionOneKHR;
 pub type SurfacePresentModeEXT<'a> = SurfacePresentModeKHR<'a>;
 pub type SurfacePresentScalingCapabilitiesEXT<'a> = SurfacePresentScalingCapabilitiesKHR<'a>;
 pub type SurfacePresentModeCompatibilityEXT<'a> = SurfacePresentModeCompatibilityKHR<'a>;

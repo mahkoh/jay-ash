@@ -1026,6 +1026,66 @@ pub mod arm {
             crate::vk::ARM_SCHEDULING_CONTROLS_EXTENSION_NAME as NAME,
             crate::vk::ARM_SCHEDULING_CONTROLS_SPEC_VERSION as SPEC_VERSION,
         };
+        #[doc = "VK_ARM_scheduling_controls device-level functions"]
+        #[derive(Clone)]
+        pub struct Device {
+            pub(crate) fp: DeviceFn,
+            pub(crate) handle: crate::vk::Device,
+        }
+        impl Device {
+            pub fn new(instance: &crate::Instance, device: &crate::Device) -> Self {
+                let handle = device.handle();
+                let fp = DeviceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        instance.get_device_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &DeviceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn device(&self) -> crate::vk::Device {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_ARM_scheduling_controls device-level function pointers"]
+        pub struct DeviceFn {
+            pub cmd_set_dispatch_parameters_arm: PFN_vkCmdSetDispatchParametersARM,
+        }
+        unsafe impl Send for DeviceFn {}
+        unsafe impl Sync for DeviceFn {}
+        impl DeviceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    cmd_set_dispatch_parameters_arm: unsafe {
+                        unsafe extern "system" fn cmd_set_dispatch_parameters_arm(
+                            _command_buffer: CommandBuffer,
+                            _p_dispatch_parameters: *const DispatchParametersARM<'_>,
+                        ) {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(cmd_set_dispatch_parameters_arm)
+                            ))
+                        }
+                        let val = _f(c"vkCmdSetDispatchParametersARM");
+                        if val.is_null() {
+                            cmd_set_dispatch_parameters_arm
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkCmdSetDispatchParametersARM>(
+                                val,
+                            )
+                        }
+                    },
+                }
+            }
+        }
     }
     #[doc = "VK_ARM_render_pass_striped"]
     pub mod render_pass_striped {
@@ -1690,6 +1750,74 @@ pub mod arm {
                                 *const c_void,
                                 PFN_vkGetDataGraphPipelinePropertiesARM,
                             >(val)
+                        }
+                    },
+                }
+            }
+        }
+    }
+    #[doc = "VK_ARM_data_graph_instruction_set_tosa"]
+    pub mod data_graph_instruction_set_tosa {
+        use super::super::*;
+        pub use {
+            crate::vk::ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_EXTENSION_NAME as NAME,
+            crate::vk::ARM_DATA_GRAPH_INSTRUCTION_SET_TOSA_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_ARM_data_graph_instruction_set_tosa instance-level functions"]
+        #[derive(Clone)]
+        pub struct Instance {
+            pub(crate) fp: InstanceFn,
+            pub(crate) handle: crate::vk::Instance,
+        }
+        impl Instance {
+            pub fn new(entry: &crate::Entry, instance: &crate::Instance) -> Self {
+                let handle = instance.handle();
+                let fp = InstanceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        entry.get_instance_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &InstanceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn instance(&self) -> crate::vk::Instance {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_ARM_data_graph_instruction_set_tosa instance-level function pointers"]
+        pub struct InstanceFn {
+            pub get_physical_device_queue_family_data_graph_engine_operation_properties_arm:
+                PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM,
+        }
+        unsafe impl Send for InstanceFn {}
+        unsafe impl Sync for InstanceFn {}
+        impl InstanceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    get_physical_device_queue_family_data_graph_engine_operation_properties_arm: unsafe {
+                        unsafe extern "system" fn get_physical_device_queue_family_data_graph_engine_operation_properties_arm(
+                            _physical_device: PhysicalDevice,
+                            _queue_family_index: u32,
+                            _p_queue_family_data_graph_properties : * const QueueFamilyDataGraphPropertiesARM < '_ >,
+                            _p_properties: *mut BaseOutStructure<'_>,
+                        ) -> Result {
+                            panic ! (concat ! ("Unable to load " , stringify ! (get_physical_device_queue_family_data_graph_engine_operation_properties_arm)))
+                        }
+                        let val = _f(
+                            c"vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM",
+                        );
+                        if val.is_null() {
+                            get_physical_device_queue_family_data_graph_engine_operation_properties_arm
+                        } else {
+                            :: core :: mem :: transmute :: < * const c_void , PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM > (val)
                         }
                     },
                 }
@@ -7088,7 +7216,7 @@ pub mod ext {
                     get_pipeline_properties_ext: unsafe {
                         unsafe extern "system" fn get_pipeline_properties_ext(
                             _device: crate::vk::Device,
-                            _p_pipeline_info: *const PipelineInfoEXT<'_>,
+                            _p_pipeline_info: *const PipelineInfoKHR<'_>,
                             _p_pipeline_properties: *mut BaseOutStructure<'_>,
                         ) -> Result {
                             panic!(concat!(
@@ -10736,6 +10864,75 @@ pub mod ext {
             crate::vk::EXT_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME as NAME,
             crate::vk::EXT_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION as SPEC_VERSION,
         };
+    }
+    #[doc = "VK_EXT_primitive_restart_index"]
+    pub mod primitive_restart_index {
+        use super::super::*;
+        pub use {
+            crate::vk::EXT_PRIMITIVE_RESTART_INDEX_EXTENSION_NAME as NAME,
+            crate::vk::EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_EXT_primitive_restart_index device-level functions"]
+        #[derive(Clone)]
+        pub struct Device {
+            pub(crate) fp: DeviceFn,
+            pub(crate) handle: crate::vk::Device,
+        }
+        impl Device {
+            pub fn new(instance: &crate::Instance, device: &crate::Device) -> Self {
+                let handle = device.handle();
+                let fp = DeviceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        instance.get_device_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &DeviceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn device(&self) -> crate::vk::Device {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_EXT_primitive_restart_index device-level function pointers"]
+        pub struct DeviceFn {
+            pub cmd_set_primitive_restart_index_ext: PFN_vkCmdSetPrimitiveRestartIndexEXT,
+        }
+        unsafe impl Send for DeviceFn {}
+        unsafe impl Sync for DeviceFn {}
+        impl DeviceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    cmd_set_primitive_restart_index_ext: unsafe {
+                        unsafe extern "system" fn cmd_set_primitive_restart_index_ext(
+                            _command_buffer: CommandBuffer,
+                            _primitive_restart_index: u32,
+                        ) {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(cmd_set_primitive_restart_index_ext)
+                            ))
+                        }
+                        let val = _f(c"vkCmdSetPrimitiveRestartIndexEXT");
+                        if val.is_null() {
+                            cmd_set_primitive_restart_index_ext
+                        } else {
+                            ::core::mem::transmute::<
+                                *const c_void,
+                                PFN_vkCmdSetPrimitiveRestartIndexEXT,
+                            >(val)
+                        }
+                    },
+                }
+            }
+        }
     }
 }
 #[doc = "Extensions tagged FUCHSIA"]
@@ -17316,6 +17513,14 @@ pub mod khr {
             }
         }
     }
+    #[doc = "VK_KHR_shader_constant_data"]
+    pub mod shader_constant_data {
+        use super::super::*;
+        pub use {
+            crate::vk::KHR_SHADER_CONSTANT_DATA_EXTENSION_NAME as NAME,
+            crate::vk::KHR_SHADER_CONSTANT_DATA_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
     #[doc = "VK_KHR_dynamic_rendering_local_read"]
     pub mod dynamic_rendering_local_read {
         use super::super::*;
@@ -17407,6 +17612,14 @@ pub mod khr {
                 }
             }
         }
+    }
+    #[doc = "VK_KHR_shader_abort"]
+    pub mod shader_abort {
+        use super::super::*;
+        pub use {
+            crate::vk::KHR_SHADER_ABORT_EXTENSION_NAME as NAME,
+            crate::vk::KHR_SHADER_ABORT_SPEC_VERSION as SPEC_VERSION,
+        };
     }
     #[doc = "VK_KHR_shader_quad_control"]
     pub mod shader_quad_control {
@@ -20330,6 +20543,96 @@ pub mod khr {
             crate::vk::KHR_MAINTENANCE_7_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_KHR_device_fault"]
+    pub mod device_fault {
+        use super::super::*;
+        pub use {
+            crate::vk::KHR_DEVICE_FAULT_EXTENSION_NAME as NAME,
+            crate::vk::KHR_DEVICE_FAULT_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_KHR_device_fault device-level functions"]
+        #[derive(Clone)]
+        pub struct Device {
+            pub(crate) fp: DeviceFn,
+            pub(crate) handle: crate::vk::Device,
+        }
+        impl Device {
+            pub fn new(instance: &crate::Instance, device: &crate::Device) -> Self {
+                let handle = device.handle();
+                let fp = DeviceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        instance.get_device_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &DeviceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn device(&self) -> crate::vk::Device {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_KHR_device_fault device-level function pointers"]
+        pub struct DeviceFn {
+            pub get_device_fault_reports_khr: PFN_vkGetDeviceFaultReportsKHR,
+            pub get_device_fault_debug_info_khr: PFN_vkGetDeviceFaultDebugInfoKHR,
+        }
+        unsafe impl Send for DeviceFn {}
+        unsafe impl Sync for DeviceFn {}
+        impl DeviceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    get_device_fault_reports_khr: unsafe {
+                        unsafe extern "system" fn get_device_fault_reports_khr(
+                            _device: crate::vk::Device,
+                            _timeout: u64,
+                            _p_fault_counts: *mut u32,
+                            _p_fault_info: *mut DeviceFaultInfoKHR<'_>,
+                        ) -> Result {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_device_fault_reports_khr)
+                            ))
+                        }
+                        let val = _f(c"vkGetDeviceFaultReportsKHR");
+                        if val.is_null() {
+                            get_device_fault_reports_khr
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkGetDeviceFaultReportsKHR>(
+                                val,
+                            )
+                        }
+                    },
+                    get_device_fault_debug_info_khr: unsafe {
+                        unsafe extern "system" fn get_device_fault_debug_info_khr(
+                            _device: crate::vk::Device,
+                            _p_debug_info: *mut DeviceFaultDebugInfoKHR<'_>,
+                        ) -> Result {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_device_fault_debug_info_khr)
+                            ))
+                        }
+                        let val = _f(c"vkGetDeviceFaultDebugInfoKHR");
+                        if val.is_null() {
+                            get_device_fault_debug_info_khr
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkGetDeviceFaultDebugInfoKHR>(
+                                val,
+                            )
+                        }
+                    },
+                }
+            }
+        }
+    }
     #[doc = "VK_KHR_maintenance8"]
     pub mod maintenance8 {
         use super::super::*;
@@ -21236,7 +21539,7 @@ pub mod nv {
                         unsafe extern "system" fn get_acceleration_structure_memory_requirements_nv(
                             _device: crate::vk::Device,
                             _p_info: *const AccelerationStructureMemoryRequirementsInfoNV<'_>,
-                            _p_memory_requirements: *mut MemoryRequirements2KHR<'_>,
+                            _p_memory_requirements: *mut MemoryRequirements2<'_>,
                         ) {
                             panic!(concat!(
                                 "Unable to load ",
@@ -24447,6 +24750,72 @@ pub mod qcom {
             crate::vk::QCOM_RENDER_PASS_STORE_OPS_EXTENSION_NAME as NAME,
             crate::vk::QCOM_RENDER_PASS_STORE_OPS_SPEC_VERSION as SPEC_VERSION,
         };
+    }
+    #[doc = "VK_QCOM_queue_perf_hint"]
+    pub mod queue_perf_hint {
+        use super::super::*;
+        pub use {
+            crate::vk::QCOM_QUEUE_PERF_HINT_EXTENSION_NAME as NAME,
+            crate::vk::QCOM_QUEUE_PERF_HINT_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_QCOM_queue_perf_hint device-level functions"]
+        #[derive(Clone)]
+        pub struct Device {
+            pub(crate) fp: DeviceFn,
+            pub(crate) handle: crate::vk::Device,
+        }
+        impl Device {
+            pub fn new(instance: &crate::Instance, device: &crate::Device) -> Self {
+                let handle = device.handle();
+                let fp = DeviceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        instance.get_device_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &DeviceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn device(&self) -> crate::vk::Device {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_QCOM_queue_perf_hint device-level function pointers"]
+        pub struct DeviceFn {
+            pub queue_set_perf_hint_qcom: PFN_vkQueueSetPerfHintQCOM,
+        }
+        unsafe impl Send for DeviceFn {}
+        unsafe impl Sync for DeviceFn {}
+        impl DeviceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    queue_set_perf_hint_qcom: unsafe {
+                        unsafe extern "system" fn queue_set_perf_hint_qcom(
+                            _queue: Queue,
+                            _p_perf_hint_info: *const PerfHintInfoQCOM<'_>,
+                        ) -> Result {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(queue_set_perf_hint_qcom)
+                            ))
+                        }
+                        let val = _f(c"vkQueueSetPerfHintQCOM");
+                        if val.is_null() {
+                            queue_set_perf_hint_qcom
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkQueueSetPerfHintQCOM>(val)
+                        }
+                    },
+                }
+            }
+        }
     }
     #[doc = "VK_QCOM_tile_shading"]
     pub mod tile_shading {

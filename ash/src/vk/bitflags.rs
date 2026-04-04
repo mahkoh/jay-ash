@@ -1225,6 +1225,7 @@ pub struct PhysicalDeviceSchedulingControlsFlagsARM(pub(crate) Flags64);
 vk_bitflags_wrapped!(PhysicalDeviceSchedulingControlsFlagsARM, Flags64);
 impl PhysicalDeviceSchedulingControlsFlagsARM {
     pub const SHADER_CORE_COUNT: Self = Self(0b1);
+    pub const DISPATCH_PARAMETERS: Self = Self(0b10);
 }
 #[repr(transparent)]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -1807,6 +1808,19 @@ impl MicromapCreateFlagsEXT {
 }
 #[repr(transparent)]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDeviceFaultFlagBitsKHR.html>"]
+pub struct DeviceFaultFlagsKHR(pub(crate) Flags);
+vk_bitflags_wrapped!(DeviceFaultFlagsKHR, Flags);
+impl DeviceFaultFlagsKHR {
+    pub const FLAG_DEVICE_LOST: Self = Self(0b1);
+    pub const FLAG_MEMORY_ADDRESS: Self = Self(0b10);
+    pub const FLAG_INSTRUCTION_ADDRESS: Self = Self(0b100);
+    pub const FLAG_VENDOR: Self = Self(0b1000);
+    pub const FLAG_WATCHDOG_TIMEOUT: Self = Self(0b1_0000);
+    pub const FLAG_OVERFLOW: Self = Self(0b10_0000);
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkIndirectCommandsLayoutUsageFlagBitsEXT.html>"]
 pub struct IndirectCommandsLayoutUsageFlagsEXT(pub(crate) Flags);
 vk_bitflags_wrapped!(IndirectCommandsLayoutUsageFlagsEXT, Flags);
@@ -1970,4 +1984,15 @@ impl AddressCommandFlagsKHR {
     pub const FULLY_BOUND: Self = Self(0b10);
     pub const STORAGE_BUFFER_USAGE: Self = Self(0b100);
     pub const UNKNOWN_STORAGE_BUFFER_USAGE: Self = Self(0b1000);
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphTOSAQualityFlagBitsARM.html>"]
+pub struct DataGraphTOSAQualityFlagsARM(pub(crate) Flags);
+vk_bitflags_wrapped!(DataGraphTOSAQualityFlagsARM, Flags);
+impl DataGraphTOSAQualityFlagsARM {
+    pub const ACCELERATED: Self = Self(0b1);
+    pub const CONFORMANT: Self = Self(0b10);
+    pub const EXPERIMENTAL: Self = Self(0b100);
+    pub const DEPRECATED: Self = Self(0b1000);
 }
