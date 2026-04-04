@@ -1960,3 +1960,14 @@ impl SpirvResourceTypeFlagsEXT {
     pub const READ_ONLY_STORAGE_BUFFER: Self = Self(0b100_0000);
     pub const READ_WRITE_STORAGE_BUFFER: Self = Self(0b1000_0000);
 }
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkAddressCommandFlagBitsKHR.html>"]
+pub struct AddressCommandFlagsKHR(pub(crate) Flags);
+vk_bitflags_wrapped!(AddressCommandFlagsKHR, Flags);
+impl AddressCommandFlagsKHR {
+    pub const PROTECTED: Self = Self(0b1);
+    pub const FULLY_BOUND: Self = Self(0b10);
+    pub const STORAGE_BUFFER_USAGE: Self = Self(0b100);
+    pub const UNKNOWN_STORAGE_BUFFER_USAGE: Self = Self(0b1000);
+}

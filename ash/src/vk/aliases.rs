@@ -396,3 +396,4 @@ pub type RenderingAttachmentLocationInfoKHR<'a> = RenderingAttachmentLocationInf
 pub type RenderingInputAttachmentIndexInfoKHR<'a> = RenderingInputAttachmentIndexInfo<'a>;
 pub type PhysicalDevicePresentModeFifoLatestReadyFeaturesEXT<'a> =
     PhysicalDevicePresentModeFifoLatestReadyFeaturesKHR<'a>;
+pub type DeviceAddressRangeEXT = DeviceAddressRangeKHR;
