@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 348;
+pub const HEADER_VERSION: u32 = 349;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -70470,6 +70470,45 @@ impl<'a> DataGraphPipelineResourceInfoARM<'a> {
 #[repr(C)]
 #[cfg_attr(feature = "debug", derive(Debug))]
 #[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineResourceInfoImageLayoutARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineResourceInfoImageLayoutARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub layout: ImageLayout,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineResourceInfoImageLayoutARM<'_> {}
+unsafe impl Sync for DataGraphPipelineResourceInfoImageLayoutARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineResourceInfoImageLayoutARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            layout: ImageLayout::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineResourceInfoImageLayoutARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_RESOURCE_INFO_IMAGE_LAYOUT_ARM;
+}
+unsafe impl ExtendsDataGraphPipelineResourceInfoARM
+    for DataGraphPipelineResourceInfoImageLayoutARM<'_>
+{
+}
+impl<'a> DataGraphPipelineResourceInfoImageLayoutARM<'a> {
+    #[inline]
+    pub fn layout(mut self, layout: ImageLayout) -> Self {
+        self.layout = layout;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineCompilerControlCreateInfoARM.html>"]
 #[must_use]
 pub struct DataGraphPipelineCompilerControlCreateInfoARM<'a> {
@@ -71050,10 +71089,28 @@ impl ::core::default::Default for DataGraphPipelineDispatchInfoARM<'_> {
 unsafe impl<'a> TaggedStructure for DataGraphPipelineDispatchInfoARM<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::DATA_GRAPH_PIPELINE_DISPATCH_INFO_ARM;
 }
+pub unsafe trait ExtendsDataGraphPipelineDispatchInfoARM {}
 impl<'a> DataGraphPipelineDispatchInfoARM<'a> {
     #[inline]
     pub fn flags(mut self, flags: DataGraphPipelineDispatchFlagsARM) -> Self {
         self.flags = flags;
+        self
+    }
+    #[doc = r" Prepends the given extension struct between the root and the first pointer. This"]
+    #[doc = r" method only exists on structs that can be passed to a function directly. Only"]
+    #[doc = r" valid extension structs can be pushed into the chain."]
+    #[doc = r" If the chain looks like `A -> B -> C`, and you call `x.push_next(&mut D)`, then the"]
+    #[doc = r" chain will look like `A -> D -> B -> C`."]
+    pub fn push_next<T: ExtendsDataGraphPipelineDispatchInfoARM + ?Sized>(
+        mut self,
+        next: &'a mut T,
+    ) -> Self {
+        unsafe {
+            let next_ptr = <*mut T>::cast(next);
+            let last_next = ptr_chain_iter(next).last().unwrap();
+            (*last_next).p_next = self.p_next as _;
+            self.p_next = next_ptr;
+        }
         self
     }
 }
@@ -75314,13 +75371,9 @@ unsafe impl<'a> TaggedStructure for DeviceFaultShaderAbortMessageInfoKHR<'a> {
 unsafe impl ExtendsDeviceFaultDebugInfoKHR for DeviceFaultShaderAbortMessageInfoKHR<'_> {}
 impl<'a> DeviceFaultShaderAbortMessageInfoKHR<'a> {
     #[inline]
-    pub fn message_data_size(mut self, message_data_size: u64) -> Self {
-        self.message_data_size = message_data_size;
-        self
-    }
-    #[inline]
-    pub fn message_data(mut self, message_data: *mut c_void) -> Self {
-        self.p_message_data = message_data;
+    pub fn message_data(mut self, message_data: &'a mut [u8]) -> Self {
+        self.message_data_size = message_data.len() as _;
+        self.p_message_data = message_data.as_mut_ptr().cast();
         self
     }
 }
@@ -75417,6 +75470,450 @@ impl<'a> QueueFamilyDataGraphTOSAPropertiesARM<'a> {
     #[inline]
     pub fn level(mut self, level: DataGraphTOSALevelARM) -> Self {
         self.level = level;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineSingleNodeConnectionARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineSingleNodeConnectionARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub set: u32,
+    pub binding: u32,
+    pub connection: DataGraphPipelineNodeConnectionTypeARM,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineSingleNodeConnectionARM<'_> {}
+unsafe impl Sync for DataGraphPipelineSingleNodeConnectionARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineSingleNodeConnectionARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            set: u32::default(),
+            binding: u32::default(),
+            connection: DataGraphPipelineNodeConnectionTypeARM::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineSingleNodeConnectionARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_SINGLE_NODE_CONNECTION_ARM;
+}
+impl<'a> DataGraphPipelineSingleNodeConnectionARM<'a> {
+    #[inline]
+    pub fn set(mut self, set: u32) -> Self {
+        self.set = set;
+        self
+    }
+    #[inline]
+    pub fn binding(mut self, binding: u32) -> Self {
+        self.binding = binding;
+        self
+    }
+    #[inline]
+    pub fn connection(mut self, connection: DataGraphPipelineNodeConnectionTypeARM) -> Self {
+        self.connection = connection;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM.html>"]
+#[must_use]
+pub struct PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub data_graph_optical_flow: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'_> {}
+unsafe impl Sync for PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'_> {}
+impl ::core::default::Default for PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            data_graph_optical_flow: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_DATA_GRAPH_OPTICAL_FLOW_FEATURES_ARM;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'_> {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'_> {}
+impl<'a> PhysicalDeviceDataGraphOpticalFlowFeaturesARM<'a> {
+    #[inline]
+    pub fn data_graph_optical_flow(mut self, data_graph_optical_flow: bool) -> Self {
+        self.data_graph_optical_flow = data_graph_optical_flow.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkQueueFamilyDataGraphOpticalFlowPropertiesARM.html>"]
+#[must_use]
+pub struct QueueFamilyDataGraphOpticalFlowPropertiesARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub supported_output_grid_sizes: DataGraphOpticalFlowGridSizeFlagsARM,
+    pub supported_hint_grid_sizes: DataGraphOpticalFlowGridSizeFlagsARM,
+    pub hint_supported: Bool32,
+    pub cost_supported: Bool32,
+    pub min_width: u32,
+    pub min_height: u32,
+    pub max_width: u32,
+    pub max_height: u32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for QueueFamilyDataGraphOpticalFlowPropertiesARM<'_> {}
+unsafe impl Sync for QueueFamilyDataGraphOpticalFlowPropertiesARM<'_> {}
+impl ::core::default::Default for QueueFamilyDataGraphOpticalFlowPropertiesARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            supported_output_grid_sizes: DataGraphOpticalFlowGridSizeFlagsARM::default(),
+            supported_hint_grid_sizes: DataGraphOpticalFlowGridSizeFlagsARM::default(),
+            hint_supported: Bool32::default(),
+            cost_supported: Bool32::default(),
+            min_width: u32::default(),
+            min_height: u32::default(),
+            max_width: u32::default(),
+            max_height: u32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for QueueFamilyDataGraphOpticalFlowPropertiesARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::QUEUE_FAMILY_DATA_GRAPH_OPTICAL_FLOW_PROPERTIES_ARM;
+}
+impl<'a> QueueFamilyDataGraphOpticalFlowPropertiesARM<'a> {
+    #[inline]
+    pub fn supported_output_grid_sizes(
+        mut self,
+        supported_output_grid_sizes: DataGraphOpticalFlowGridSizeFlagsARM,
+    ) -> Self {
+        self.supported_output_grid_sizes = supported_output_grid_sizes;
+        self
+    }
+    #[inline]
+    pub fn supported_hint_grid_sizes(
+        mut self,
+        supported_hint_grid_sizes: DataGraphOpticalFlowGridSizeFlagsARM,
+    ) -> Self {
+        self.supported_hint_grid_sizes = supported_hint_grid_sizes;
+        self
+    }
+    #[inline]
+    pub fn hint_supported(mut self, hint_supported: bool) -> Self {
+        self.hint_supported = hint_supported.into();
+        self
+    }
+    #[inline]
+    pub fn cost_supported(mut self, cost_supported: bool) -> Self {
+        self.cost_supported = cost_supported.into();
+        self
+    }
+    #[inline]
+    pub fn min_width(mut self, min_width: u32) -> Self {
+        self.min_width = min_width;
+        self
+    }
+    #[inline]
+    pub fn min_height(mut self, min_height: u32) -> Self {
+        self.min_height = min_height;
+        self
+    }
+    #[inline]
+    pub fn max_width(mut self, max_width: u32) -> Self {
+        self.max_width = max_width;
+        self
+    }
+    #[inline]
+    pub fn max_height(mut self, max_height: u32) -> Self {
+        self.max_height = max_height;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowImageFormatInfoARM.html>"]
+#[must_use]
+pub struct DataGraphOpticalFlowImageFormatInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub usage: DataGraphOpticalFlowImageUsageFlagsARM,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphOpticalFlowImageFormatInfoARM<'_> {}
+unsafe impl Sync for DataGraphOpticalFlowImageFormatInfoARM<'_> {}
+impl ::core::default::Default for DataGraphOpticalFlowImageFormatInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            usage: DataGraphOpticalFlowImageUsageFlagsARM::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphOpticalFlowImageFormatInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_INFO_ARM;
+}
+unsafe impl ExtendsPhysicalDeviceImageFormatInfo2 for DataGraphOpticalFlowImageFormatInfoARM<'_> {}
+unsafe impl ExtendsImageCreateInfo for DataGraphOpticalFlowImageFormatInfoARM<'_> {}
+impl<'a> DataGraphOpticalFlowImageFormatInfoARM<'a> {
+    #[inline]
+    pub fn usage(mut self, usage: DataGraphOpticalFlowImageUsageFlagsARM) -> Self {
+        self.usage = usage;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowImageFormatPropertiesARM.html>"]
+#[must_use]
+pub struct DataGraphOpticalFlowImageFormatPropertiesARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub format: Format,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphOpticalFlowImageFormatPropertiesARM<'_> {}
+unsafe impl Sync for DataGraphOpticalFlowImageFormatPropertiesARM<'_> {}
+impl ::core::default::Default for DataGraphOpticalFlowImageFormatPropertiesARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            format: Format::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphOpticalFlowImageFormatPropertiesARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_ARM;
+}
+impl<'a> DataGraphOpticalFlowImageFormatPropertiesARM<'a> {
+    #[inline]
+    pub fn format(mut self, format: Format) -> Self {
+        self.format = format;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineSingleNodeCreateInfoARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineSingleNodeCreateInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub node_type: DataGraphPipelineNodeTypeARM,
+    pub connection_count: u32,
+    pub p_connections: *const DataGraphPipelineSingleNodeConnectionARM<'a>,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineSingleNodeCreateInfoARM<'_> {}
+unsafe impl Sync for DataGraphPipelineSingleNodeCreateInfoARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineSingleNodeCreateInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            node_type: DataGraphPipelineNodeTypeARM::default(),
+            connection_count: u32::default(),
+            p_connections: ::core::ptr::null(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineSingleNodeCreateInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_SINGLE_NODE_CREATE_INFO_ARM;
+}
+unsafe impl ExtendsDataGraphPipelineCreateInfoARM for DataGraphPipelineSingleNodeCreateInfoARM<'_> {}
+impl<'a> DataGraphPipelineSingleNodeCreateInfoARM<'a> {
+    #[inline]
+    pub fn node_type(mut self, node_type: DataGraphPipelineNodeTypeARM) -> Self {
+        self.node_type = node_type;
+        self
+    }
+    #[inline]
+    pub fn connections(
+        mut self,
+        connections: &'a [DataGraphPipelineSingleNodeConnectionARM<'a>],
+    ) -> Self {
+        self.connection_count = connections.len() as _;
+        self.p_connections = connections.as_ptr();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineOpticalFlowCreateInfoARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineOpticalFlowCreateInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub width: u32,
+    pub height: u32,
+    pub image_format: Format,
+    pub flow_vector_format: Format,
+    pub cost_format: Format,
+    pub output_grid_size: DataGraphOpticalFlowGridSizeFlagsARM,
+    pub hint_grid_size: DataGraphOpticalFlowGridSizeFlagsARM,
+    pub performance_level: DataGraphOpticalFlowPerformanceLevelARM,
+    pub flags: DataGraphOpticalFlowCreateFlagsARM,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineOpticalFlowCreateInfoARM<'_> {}
+unsafe impl Sync for DataGraphPipelineOpticalFlowCreateInfoARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineOpticalFlowCreateInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            width: u32::default(),
+            height: u32::default(),
+            image_format: Format::default(),
+            flow_vector_format: Format::default(),
+            cost_format: Format::default(),
+            output_grid_size: DataGraphOpticalFlowGridSizeFlagsARM::default(),
+            hint_grid_size: DataGraphOpticalFlowGridSizeFlagsARM::default(),
+            performance_level: DataGraphOpticalFlowPerformanceLevelARM::default(),
+            flags: DataGraphOpticalFlowCreateFlagsARM::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineOpticalFlowCreateInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_OPTICAL_FLOW_CREATE_INFO_ARM;
+}
+unsafe impl ExtendsDataGraphPipelineCreateInfoARM
+    for DataGraphPipelineOpticalFlowCreateInfoARM<'_>
+{
+}
+impl<'a> DataGraphPipelineOpticalFlowCreateInfoARM<'a> {
+    #[inline]
+    pub fn width(mut self, width: u32) -> Self {
+        self.width = width;
+        self
+    }
+    #[inline]
+    pub fn height(mut self, height: u32) -> Self {
+        self.height = height;
+        self
+    }
+    #[inline]
+    pub fn image_format(mut self, image_format: Format) -> Self {
+        self.image_format = image_format;
+        self
+    }
+    #[inline]
+    pub fn flow_vector_format(mut self, flow_vector_format: Format) -> Self {
+        self.flow_vector_format = flow_vector_format;
+        self
+    }
+    #[inline]
+    pub fn cost_format(mut self, cost_format: Format) -> Self {
+        self.cost_format = cost_format;
+        self
+    }
+    #[inline]
+    pub fn output_grid_size(
+        mut self,
+        output_grid_size: DataGraphOpticalFlowGridSizeFlagsARM,
+    ) -> Self {
+        self.output_grid_size = output_grid_size;
+        self
+    }
+    #[inline]
+    pub fn hint_grid_size(mut self, hint_grid_size: DataGraphOpticalFlowGridSizeFlagsARM) -> Self {
+        self.hint_grid_size = hint_grid_size;
+        self
+    }
+    #[inline]
+    pub fn performance_level(
+        mut self,
+        performance_level: DataGraphOpticalFlowPerformanceLevelARM,
+    ) -> Self {
+        self.performance_level = performance_level;
+        self
+    }
+    #[inline]
+    pub fn flags(mut self, flags: DataGraphOpticalFlowCreateFlagsARM) -> Self {
+        self.flags = flags;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineOpticalFlowDispatchInfoARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineOpticalFlowDispatchInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub flags: DataGraphOpticalFlowExecuteFlagsARM,
+    pub mean_flow_l1_norm_hint: u32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineOpticalFlowDispatchInfoARM<'_> {}
+unsafe impl Sync for DataGraphPipelineOpticalFlowDispatchInfoARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineOpticalFlowDispatchInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            flags: DataGraphOpticalFlowExecuteFlagsARM::default(),
+            mean_flow_l1_norm_hint: u32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineOpticalFlowDispatchInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_OPTICAL_FLOW_DISPATCH_INFO_ARM;
+}
+unsafe impl ExtendsDataGraphPipelineDispatchInfoARM
+    for DataGraphPipelineOpticalFlowDispatchInfoARM<'_>
+{
+}
+impl<'a> DataGraphPipelineOpticalFlowDispatchInfoARM<'a> {
+    #[inline]
+    pub fn flags(mut self, flags: DataGraphOpticalFlowExecuteFlagsARM) -> Self {
+        self.flags = flags;
+        self
+    }
+    #[inline]
+    pub fn mean_flow_l1_norm_hint(mut self, mean_flow_l1_norm_hint: u32) -> Self {
+        self.mean_flow_l1_norm_hint = mean_flow_l1_norm_hint;
         self
     }
 }

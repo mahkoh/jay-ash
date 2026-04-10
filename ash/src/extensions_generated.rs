@@ -2154,6 +2154,96 @@ pub mod arm {
             crate::vk::ARM_FORMAT_PACK_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_ARM_data_graph_optical_flow"]
+    pub mod data_graph_optical_flow {
+        use super::super::*;
+        pub use {
+            crate::vk::ARM_DATA_GRAPH_OPTICAL_FLOW_EXTENSION_NAME as NAME,
+            crate::vk::ARM_DATA_GRAPH_OPTICAL_FLOW_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_ARM_data_graph_optical_flow instance-level functions"]
+        #[derive(Clone)]
+        pub struct Instance {
+            pub(crate) fp: InstanceFn,
+            pub(crate) handle: crate::vk::Instance,
+        }
+        impl Instance {
+            pub fn new(entry: &crate::Entry, instance: &crate::Instance) -> Self {
+                let handle = instance.handle();
+                let fp = InstanceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        entry.get_instance_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &InstanceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn instance(&self) -> crate::vk::Instance {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_ARM_data_graph_optical_flow instance-level function pointers"]
+        pub struct InstanceFn {
+            pub get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm:
+                PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM,
+            pub get_physical_device_queue_family_data_graph_engine_operation_properties_arm:
+                PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM,
+        }
+        unsafe impl Send for InstanceFn {}
+        unsafe impl Sync for InstanceFn {}
+        impl InstanceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm: unsafe {
+                        unsafe extern "system" fn get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm(
+                            _physical_device: PhysicalDevice,
+                            _queue_family_index: u32,
+                            _p_queue_family_data_graph_properties : * const QueueFamilyDataGraphPropertiesARM < '_ >,
+                            _p_optical_flow_image_format_info : * const DataGraphOpticalFlowImageFormatInfoARM < '_ >,
+                            _p_format_count: *mut u32,
+                            _p_image_format_properties : * mut DataGraphOpticalFlowImageFormatPropertiesARM < '_ >,
+                        ) -> Result {
+                            panic ! (concat ! ("Unable to load " , stringify ! (get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm)))
+                        }
+                        let val = _f(
+                            c"vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM",
+                        );
+                        if val.is_null() {
+                            get_physical_device_queue_family_data_graph_optical_flow_image_formats_arm
+                        } else {
+                            :: core :: mem :: transmute :: < * const c_void , PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM > (val)
+                        }
+                    },
+                    get_physical_device_queue_family_data_graph_engine_operation_properties_arm: unsafe {
+                        unsafe extern "system" fn get_physical_device_queue_family_data_graph_engine_operation_properties_arm(
+                            _physical_device: PhysicalDevice,
+                            _queue_family_index: u32,
+                            _p_queue_family_data_graph_properties : * const QueueFamilyDataGraphPropertiesARM < '_ >,
+                            _p_properties: *mut BaseOutStructure<'_>,
+                        ) -> Result {
+                            panic ! (concat ! ("Unable to load " , stringify ! (get_physical_device_queue_family_data_graph_engine_operation_properties_arm)))
+                        }
+                        let val = _f(
+                            c"vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM",
+                        );
+                        if val.is_null() {
+                            get_physical_device_queue_family_data_graph_engine_operation_properties_arm
+                        } else {
+                            :: core :: mem :: transmute :: < * const c_void , PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM > (val)
+                        }
+                    },
+                }
+            }
+        }
+    }
 }
 #[doc = "Extensions tagged EXT"]
 pub mod ext {
