@@ -5379,6 +5379,51 @@ impl StructureType {
     pub const RENDERING_END_INFO_KHR: Self = Self(1_000_619_003);
     pub const RESOLVE_IMAGE_MODE_INFO_KHR: Self = Self(1_000_630_004);
 }
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl DataGraphPipelineNodeConnectionTypeARM {
+    pub const OPTICAL_FLOW_INPUT: Self = Self(1_000_631_000);
+    pub const OPTICAL_FLOW_REFERENCE: Self = Self(1_000_631_001);
+    pub const OPTICAL_FLOW_HINT: Self = Self(1_000_631_002);
+    pub const OPTICAL_FLOW_FLOW_VECTOR: Self = Self(1_000_631_003);
+    pub const OPTICAL_FLOW_COST: Self = Self(1_000_631_004);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl DataGraphPipelineNodeTypeARM {
+    pub const OPTICAL_FLOW: Self = Self(1_000_631_000);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl DataGraphPipelineSessionBindPointARM {
+    pub const OPTICAL_FLOW_CACHE: Self = Self(1_000_631_001);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl DataGraphPipelineSessionCreateFlagsARM {
+    pub const OPTICAL_FLOW_CACHE: Self = Self(0b10);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl FormatFeatureFlags2 {
+    pub const DATA_GRAPH_OPTICAL_FLOW_IMAGE_ARM: Self =
+        Self(0b1_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000);
+    pub const DATA_GRAPH_OPTICAL_FLOW_VECTOR_ARM: Self =
+        Self(0b10_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000);
+    pub const DATA_GRAPH_OPTICAL_FLOW_COST_ARM: Self =
+        Self(0b100_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl PhysicalDeviceDataGraphOperationTypeARM {
+    pub const OPTICAL_FLOW: Self = Self(1_000_631_000);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_optical_flow'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_DATA_GRAPH_OPTICAL_FLOW_FEATURES_ARM: Self = Self(1_000_631_000);
+    pub const QUEUE_FAMILY_DATA_GRAPH_OPTICAL_FLOW_PROPERTIES_ARM: Self = Self(1_000_631_001);
+    pub const DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_INFO_ARM: Self = Self(1_000_631_003);
+    pub const DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_ARM: Self = Self(1_000_631_004);
+    pub const DATA_GRAPH_PIPELINE_OPTICAL_FLOW_DISPATCH_INFO_ARM: Self = Self(1_000_631_005);
+    pub const DATA_GRAPH_PIPELINE_OPTICAL_FLOW_CREATE_INFO_ARM: Self = Self(1_000_631_002);
+    pub const DATA_GRAPH_PIPELINE_RESOURCE_INFO_IMAGE_LAYOUT_ARM: Self = Self(1_000_631_006);
+    pub const DATA_GRAPH_PIPELINE_SINGLE_NODE_CREATE_INFO_ARM: Self = Self(1_000_631_007);
+    pub const DATA_GRAPH_PIPELINE_SINGLE_NODE_CONNECTION_ARM: Self = Self(1_000_631_008);
+}
 #[doc = "Generated from 'VK_EXT_shader_long_vector'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT: Self = Self(1_000_635_000);
@@ -9923,6 +9968,18 @@ pub const QCOM_DATA_GRAPH_MODEL_EXTENSION_NAME: &CStr = c"VK_QCOM_data_graph_mod
 pub const QCOM_DATA_GRAPH_MODEL_SPEC_VERSION: u32 = 1u32;
 pub const KHR_MAINTENANCE_10_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance10";
 pub const KHR_MAINTENANCE_10_SPEC_VERSION: u32 = 1u32;
+pub const ARM_DATA_GRAPH_OPTICAL_FLOW_EXTENSION_NAME: &CStr = c"VK_ARM_data_graph_optical_flow";
+pub const ARM_DATA_GRAPH_OPTICAL_FLOW_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM =
+    unsafe extern "system" fn(
+        physical_device: PhysicalDevice,
+        queue_family_index: u32,
+        p_queue_family_data_graph_properties: *const QueueFamilyDataGraphPropertiesARM<'_>,
+        p_optical_flow_image_format_info: *const DataGraphOpticalFlowImageFormatInfoARM<'_>,
+        p_format_count: *mut u32,
+        p_image_format_properties: *mut DataGraphOpticalFlowImageFormatPropertiesARM<'_>,
+    ) -> Result;
 pub const EXT_SHADER_LONG_VECTOR_EXTENSION_NAME: &CStr = c"VK_EXT_shader_long_vector";
 pub const EXT_SHADER_LONG_VECTOR_SPEC_VERSION: u32 = 1u32;
 pub const SEC_PIPELINE_CACHE_INCREMENTAL_MODE_EXTENSION_NAME: &CStr =
