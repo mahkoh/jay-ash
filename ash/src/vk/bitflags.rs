@@ -1996,3 +1996,49 @@ impl DataGraphTOSAQualityFlagsARM {
     pub const EXPERIMENTAL: Self = Self(0b100);
     pub const DEPRECATED: Self = Self(0b1000);
 }
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowGridSizeFlagBitsARM.html>"]
+pub struct DataGraphOpticalFlowGridSizeFlagsARM(pub(crate) Flags);
+vk_bitflags_wrapped!(DataGraphOpticalFlowGridSizeFlagsARM, Flags);
+impl DataGraphOpticalFlowGridSizeFlagsARM {
+    pub const UNKNOWN: Self = Self(0);
+    pub const TYPE_1X1: Self = Self(0b1);
+    pub const TYPE_2X2: Self = Self(0b10);
+    pub const TYPE_4X4: Self = Self(0b100);
+    pub const TYPE_8X8: Self = Self(0b1000);
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowImageUsageFlagBitsARM.html>"]
+pub struct DataGraphOpticalFlowImageUsageFlagsARM(pub(crate) Flags);
+vk_bitflags_wrapped!(DataGraphOpticalFlowImageUsageFlagsARM, Flags);
+impl DataGraphOpticalFlowImageUsageFlagsARM {
+    pub const UNKNOWN: Self = Self(0);
+    pub const INPUT: Self = Self(0b1);
+    pub const OUTPUT: Self = Self(0b10);
+    pub const HINT: Self = Self(0b100);
+    pub const COST: Self = Self(0b1000);
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowCreateFlagBitsARM.html>"]
+pub struct DataGraphOpticalFlowCreateFlagsARM(pub(crate) Flags);
+vk_bitflags_wrapped!(DataGraphOpticalFlowCreateFlagsARM, Flags);
+impl DataGraphOpticalFlowCreateFlagsARM {
+    pub const ENABLE_HINT: Self = Self(0b1);
+    pub const ENABLE_COST: Self = Self(0b10);
+    pub const RESERVED_30: Self = Self(0b100_0000_0000_0000_0000_0000_0000_0000);
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowExecuteFlagBitsARM.html>"]
+pub struct DataGraphOpticalFlowExecuteFlagsARM(pub(crate) Flags);
+vk_bitflags_wrapped!(DataGraphOpticalFlowExecuteFlagsARM, Flags);
+impl DataGraphOpticalFlowExecuteFlagsARM {
+    pub const DISABLE_TEMPORAL_HINTS: Self = Self(0b1);
+    pub const INPUT_UNCHANGED: Self = Self(0b10);
+    pub const REFERENCE_UNCHANGED: Self = Self(0b100);
+    pub const INPUT_IS_PREVIOUS_REFERENCE: Self = Self(0b1000);
+    pub const REFERENCE_IS_PREVIOUS_INPUT: Self = Self(0b1_0000);
+}

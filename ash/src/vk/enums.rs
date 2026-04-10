@@ -3497,6 +3497,56 @@ impl DataGraphTOSALevelARM {
     pub const NONE: Self = Self(0);
     pub const TYPE_8K: Self = Self(1);
 }
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphOpticalFlowPerformanceLevelARM.html>"]
+pub struct DataGraphOpticalFlowPerformanceLevelARM(pub(crate) i32);
+impl DataGraphOpticalFlowPerformanceLevelARM {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl DataGraphOpticalFlowPerformanceLevelARM {
+    pub const UNKNOWN: Self = Self(0);
+    pub const SLOW: Self = Self(1);
+    pub const MEDIUM: Self = Self(2);
+    pub const FAST: Self = Self(3);
+}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineNodeConnectionTypeARM.html>"]
+pub struct DataGraphPipelineNodeConnectionTypeARM(pub(crate) i32);
+impl DataGraphPipelineNodeConnectionTypeARM {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl DataGraphPipelineNodeConnectionTypeARM {}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineNodeTypeARM.html>"]
+pub struct DataGraphPipelineNodeTypeARM(pub(crate) i32);
+impl DataGraphPipelineNodeTypeARM {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl DataGraphPipelineNodeTypeARM {}
 impl fmt::Debug for ObjectType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = match *self {
