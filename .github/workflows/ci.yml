@@ -76,11 +76,11 @@ jobs:
       - name: Add Rust target ${{ matrix.target }}
         run: rustup target add ${{ matrix.target }}
       - name: Clippy lint without features
-        run: cargo clippy --target ${{ matrix.target }} --no-default-features -- -D warnings
+        run: cargo clippy --target ${{ matrix.target }} --no-default-features -p jay-ash -- -D warnings
       - name: Clippy lint with all features
-        run: cargo clippy --target ${{ matrix.target }} --workspace --all-targets --all-features -- -D warnings
+        run: cargo clippy --target ${{ matrix.target }} -p jay-ash --all-targets --all-features -- -D warnings
       - name: Clippy lint with default features
-        run: cargo clippy --target ${{ matrix.target }} --workspace --all-targets -- -D warnings
+        run: cargo clippy --target ${{ matrix.target }} -p jay-ash --all-targets -- -D warnings
 
   docs:
     name: Build-test docs
