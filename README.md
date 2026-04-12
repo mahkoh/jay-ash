@@ -5,7 +5,8 @@
 ![MSRV](https://img.shields.io/crates/msrv/jay-ash)
 
 This crate is a fork of [ash](https://github.com/ash-rs/ash). It is based on the
-ash 0.38 release but with the vulkan bindings updated to vulkan 1.4.341.
+ash 0.38 release but with the vulkan bindings updated automatically every 6
+hours. See Cargo.toml for the current version.
 
 You should never expose any of the jay-ash types in public interfaces. Instead
 expose the underlying u64 handles and void pointers that are compatible with any
