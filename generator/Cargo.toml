@@ -18,7 +18,7 @@ quote = "1.0"
 regex = "1.4"
 vk-parse = { version = "0.20.0", features = ["vkxml-convert"] }
 vkxml = "0.3"
-linearize = { version = "0.1.5", features = ["derive"] }
+linearize = { version = "0.1.6", features = ["derive"] }
 indexmap = "2.13.0"
 
 [dependencies.syn]
