@@ -2244,6 +2244,14 @@ pub mod arm {
             }
         }
     }
+    #[doc = "VK_ARM_data_graph_neural_accelerator_statistics"]
+    pub mod data_graph_neural_accelerator_statistics {
+        use super::super::*;
+        pub use {
+            crate::vk::ARM_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_EXTENSION_NAME as NAME,
+            crate::vk::ARM_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged EXT"]
 pub mod ext {
@@ -20845,6 +20853,14 @@ pub mod khr {
             }
         }
     }
+    #[doc = "VK_KHR_maintenance11"]
+    pub mod maintenance11 {
+        use super::super::*;
+        pub use {
+            crate::vk::KHR_MAINTENANCE_11_EXTENSION_NAME as NAME,
+            crate::vk::KHR_MAINTENANCE_11_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged LUNARG"]
 pub mod lunarg {
@@ -25531,6 +25547,14 @@ pub mod sec {
                 }
             }
         }
+    }
+    #[doc = "VK_SEC_throttle_hint"]
+    pub mod throttle_hint {
+        use super::super::*;
+        pub use {
+            crate::vk::SEC_THROTTLE_HINT_EXTENSION_NAME as NAME,
+            crate::vk::SEC_THROTTLE_HINT_SPEC_VERSION as SPEC_VERSION,
+        };
     }
 }
 #[doc = "Extensions tagged VALVE"]

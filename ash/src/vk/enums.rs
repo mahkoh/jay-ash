@@ -3457,6 +3457,25 @@ impl PerfHintTypeQCOM {
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkThrottleHintTypeSEC.html>"]
+pub struct ThrottleHintTypeSEC(pub(crate) i32);
+impl ThrottleHintTypeSEC {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl ThrottleHintTypeSEC {
+    pub const DEFAULT: Self = Self(0);
+    pub const LOW: Self = Self(1);
+    pub const HIGH: Self = Self(2);
+}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDescriptorMappingSourceEXT.html>"]
 pub struct DescriptorMappingSourceEXT(pub(crate) i32);
 impl DescriptorMappingSourceEXT {
@@ -3547,6 +3566,25 @@ impl DataGraphPipelineNodeTypeARM {
     }
 }
 impl DataGraphPipelineNodeTypeARM {}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkNeuralAcceleratorStatisticsModeARM.html>"]
+pub struct NeuralAcceleratorStatisticsModeARM(pub(crate) i32);
+impl NeuralAcceleratorStatisticsModeARM {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl NeuralAcceleratorStatisticsModeARM {
+    pub const DISABLED: Self = Self(0);
+    pub const STATISTICS0: Self = Self(1);
+    pub const STATISTICS1: Self = Self(2);
+}
 impl fmt::Debug for ObjectType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = match *self {
