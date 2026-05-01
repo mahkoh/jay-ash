@@ -5444,6 +5444,24 @@ impl StructureType {
     pub const COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV: Self = Self(1_000_645_000);
     pub const PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: Self = Self(1_000_645_001);
 }
+#[doc = "Generated from 'VK_KHR_maintenance11'"]
+impl ImageCreateFlags {
+    pub const ALIAS_SINGLE_LAYER_DESCRIPTOR_KHR: Self = Self(0b100_0000_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_KHR_maintenance11'"]
+impl PipelineLayoutCreateFlags {
+    pub const NO_TASK_SHADER_KHR: Self = Self(0b100);
+}
+#[doc = "Generated from 'VK_KHR_maintenance11'"]
+impl ShaderCreateFlagsEXT {
+    pub const INDEPENDENT_SETS_KHR: Self = Self(0b100_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_KHR_maintenance11'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_MAINTENANCE_11_FEATURES_KHR: Self = Self(1_000_657_000);
+    pub const QUEUE_FAMILY_OPTIMAL_IMAGE_TRANSFER_GRANULARITY_PROPERTIES_KHR: Self =
+        Self(1_000_657_001);
+}
 #[doc = "Generated from 'VK_EXT_shader_subgroup_partitioned'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT: Self = Self(1_000_662_000);
@@ -5460,6 +5478,28 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
         Self(1_000_673_000);
+}
+#[doc = "Generated from 'VK_SEC_throttle_hint'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_THROTTLE_HINT_FEATURES_SEC: Self = Self(1_000_674_000);
+    pub const THROTTLE_HINT_SUBMIT_INFO_SEC: Self = Self(1_000_674_001);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_neural_accelerator_statistics'"]
+impl DataGraphPipelinePropertyARM {
+    pub const NEURAL_ACCELERATOR_DEBUG_DATABASE: Self = Self(1_000_676_000);
+    pub const NEURAL_ACCELERATOR_STATISTICS_INFO: Self = Self(1_000_676_001);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_neural_accelerator_statistics'"]
+impl DataGraphPipelineSessionBindPointARM {
+    pub const NEURAL_ACCELERATOR_STATISTICS: Self = Self(1_000_676_000);
+}
+#[doc = "Generated from 'VK_ARM_data_graph_neural_accelerator_statistics'"]
+impl StructureType {
+    pub const DATA_GRAPH_PIPELINE_NEURAL_STATISTICS_CREATE_INFO_ARM: Self = Self(1_000_676_000);
+    pub const DATA_GRAPH_PIPELINE_SESSION_NEURAL_STATISTICS_CREATE_INFO_ARM: Self =
+        Self(1_000_676_001);
+    pub const PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM: Self =
+        Self(1_000_676_002);
 }
 #[doc = "Generated from 'VK_EXT_primitive_restart_index'"]
 impl StructureType {
@@ -9830,7 +9870,7 @@ pub const NV_PUSH_CONSTANT_BANK_EXTENSION_NAME: &CStr = c"VK_NV_push_constant_ba
 pub const NV_PUSH_CONSTANT_BANK_SPEC_VERSION: u32 = 1u32;
 pub const EXT_RAY_TRACING_INVOCATION_REORDER_EXTENSION_NAME: &CStr =
     c"VK_EXT_ray_tracing_invocation_reorder";
-pub const EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION: u32 = 1u32;
+pub const EXT_RAY_TRACING_INVOCATION_REORDER_SPEC_VERSION: u32 = 2u32;
 pub const EXT_DEPTH_CLAMP_CONTROL_EXTENSION_NAME: &CStr = c"VK_EXT_depth_clamp_control";
 pub const EXT_DEPTH_CLAMP_CONTROL_SPEC_VERSION: u32 = 1u32;
 pub const KHR_MAINTENANCE_9_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance9";
@@ -9995,6 +10035,8 @@ pub type PFN_vkCmdSetComputeOccupancyPriorityNV = unsafe extern "system" fn(
     command_buffer: CommandBuffer,
     p_parameters: *const ComputeOccupancyPriorityParametersNV<'_>,
 );
+pub const KHR_MAINTENANCE_11_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance11";
+pub const KHR_MAINTENANCE_11_SPEC_VERSION: u32 = 1u32;
 pub const EXT_SHADER_SUBGROUP_PARTITIONED_EXTENSION_NAME: &CStr =
     c"VK_EXT_shader_subgroup_partitioned";
 pub const EXT_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION: u32 = 1u32;
@@ -10016,6 +10058,11 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME: &CStr =
     c"VK_VALVE_shader_mixed_float_dot_product";
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION: u32 = 1u32;
+pub const SEC_THROTTLE_HINT_EXTENSION_NAME: &CStr = c"VK_SEC_throttle_hint";
+pub const SEC_THROTTLE_HINT_SPEC_VERSION: u32 = 1u32;
+pub const ARM_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_EXTENSION_NAME: &CStr =
+    c"VK_ARM_data_graph_neural_accelerator_statistics";
+pub const ARM_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_SPEC_VERSION: u32 = 1u32;
 pub const EXT_PRIMITIVE_RESTART_INDEX_EXTENSION_NAME: &CStr = c"VK_EXT_primitive_restart_index";
 pub const EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]

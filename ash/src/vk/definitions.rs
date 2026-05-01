@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 349;
+pub const HEADER_VERSION: u32 = 350;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -1462,15 +1462,9 @@ impl<'a> DeviceCreateInfo<'a> {
     #[deprecated = "unused"]
     #[allow(deprecated)]
     #[inline]
-    pub fn enabled_layer_count(mut self, enabled_layer_count: u32) -> Self {
-        self.enabled_layer_count = enabled_layer_count;
-        self
-    }
-    #[deprecated = "unused"]
-    #[allow(deprecated)]
-    #[inline]
-    pub fn enabled_layer_names(mut self, enabled_layer_names: &'a *const c_char) -> Self {
-        self.pp_enabled_layer_names = enabled_layer_names;
+    pub fn enabled_layer_names(mut self, enabled_layer_names: &'a [*const c_char]) -> Self {
+        self.enabled_layer_count = enabled_layer_names.len() as _;
+        self.pp_enabled_layer_names = enabled_layer_names.as_ptr();
         self
     }
     #[inline]
@@ -21692,6 +21686,43 @@ impl<'a> PhysicalDeviceMaintenance9PropertiesKHR<'a> {
 #[repr(C)]
 #[cfg_attr(feature = "debug", derive(Debug))]
 #[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMaintenance11FeaturesKHR.html>"]
+#[must_use]
+pub struct PhysicalDeviceMaintenance11FeaturesKHR<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub maintenance11: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceMaintenance11FeaturesKHR<'_> {}
+unsafe impl Sync for PhysicalDeviceMaintenance11FeaturesKHR<'_> {}
+impl ::core::default::Default for PhysicalDeviceMaintenance11FeaturesKHR<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            maintenance11: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceMaintenance11FeaturesKHR<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_MAINTENANCE_11_FEATURES_KHR;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceMaintenance11FeaturesKHR<'_> {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceMaintenance11FeaturesKHR<'_> {}
+impl<'a> PhysicalDeviceMaintenance11FeaturesKHR<'a> {
+    #[inline]
+    pub fn maintenance11(mut self, maintenance11: bool) -> Self {
+        self.maintenance11 = maintenance11.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceMaintenance10PropertiesKHR.html>"]
 #[must_use]
 pub struct PhysicalDeviceMaintenance10PropertiesKHR<'a> {
@@ -21820,6 +21851,48 @@ impl<'a> QueueFamilyOwnershipTransferPropertiesKHR<'a> {
         optimal_image_transfer_to_queue_families: u32,
     ) -> Self {
         self.optimal_image_transfer_to_queue_families = optimal_image_transfer_to_queue_families;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkQueueFamilyOptimalImageTransferGranularityPropertiesKHR.html>"]
+#[must_use]
+pub struct QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub optimal_image_transfer_granularity: Extent3D,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'_> {}
+unsafe impl Sync for QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'_> {}
+impl ::core::default::Default for QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            optimal_image_transfer_granularity: Extent3D::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::QUEUE_FAMILY_OPTIMAL_IMAGE_TRANSFER_GRANULARITY_PROPERTIES_KHR;
+}
+unsafe impl ExtendsQueueFamilyProperties2
+    for QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'_>
+{
+}
+impl<'a> QueueFamilyOptimalImageTransferGranularityPropertiesKHR<'a> {
+    #[inline]
+    pub fn optimal_image_transfer_granularity(
+        mut self,
+        optimal_image_transfer_granularity: Extent3D,
+    ) -> Self {
+        self.optimal_image_transfer_granularity = optimal_image_transfer_granularity;
         self
     }
 }
@@ -56591,6 +56664,135 @@ impl<'a> GraphicsPipelineLibraryCreateInfoEXT<'a> {
 #[repr(C)]
 #[cfg_attr(feature = "debug", derive(Debug))]
 #[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM.html>"]
+#[must_use]
+pub struct PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub data_graph_neural_accelerator_statistics: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'_> {}
+unsafe impl Sync for PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'_> {}
+impl ::core::default::Default
+    for PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'_>
+{
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            data_graph_neural_accelerator_statistics: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure
+    for PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'a>
+{
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'_>
+{
+}
+unsafe impl ExtendsDeviceCreateInfo
+    for PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'_>
+{
+}
+impl<'a> PhysicalDeviceDataGraphNeuralAcceleratorStatisticsFeaturesARM<'a> {
+    #[inline]
+    pub fn data_graph_neural_accelerator_statistics(
+        mut self,
+        data_graph_neural_accelerator_statistics: bool,
+    ) -> Self {
+        self.data_graph_neural_accelerator_statistics =
+            data_graph_neural_accelerator_statistics.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineNeuralStatisticsCreateInfoARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineNeuralStatisticsCreateInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub allow_neural_statistics: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineNeuralStatisticsCreateInfoARM<'_> {}
+unsafe impl Sync for DataGraphPipelineNeuralStatisticsCreateInfoARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineNeuralStatisticsCreateInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            allow_neural_statistics: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineNeuralStatisticsCreateInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_NEURAL_STATISTICS_CREATE_INFO_ARM;
+}
+unsafe impl ExtendsDataGraphPipelineCreateInfoARM
+    for DataGraphPipelineNeuralStatisticsCreateInfoARM<'_>
+{
+}
+impl<'a> DataGraphPipelineNeuralStatisticsCreateInfoARM<'a> {
+    #[inline]
+    pub fn allow_neural_statistics(mut self, allow_neural_statistics: bool) -> Self {
+        self.allow_neural_statistics = allow_neural_statistics.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkDataGraphPipelineSessionNeuralStatisticsCreateInfoARM.html>"]
+#[must_use]
+pub struct DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub mode: NeuralAcceleratorStatisticsModeARM,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'_> {}
+unsafe impl Sync for DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'_> {}
+impl ::core::default::Default for DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            mode: NeuralAcceleratorStatisticsModeARM::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::DATA_GRAPH_PIPELINE_SESSION_NEURAL_STATISTICS_CREATE_INFO_ARM;
+}
+unsafe impl ExtendsDataGraphPipelineSessionCreateInfoARM
+    for DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'_>
+{
+}
+impl<'a> DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'a> {
+    #[inline]
+    pub fn mode(mut self, mode: NeuralAcceleratorStatisticsModeARM) -> Self {
+        self.mode = mode;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.html>"]
 #[must_use]
 pub struct PhysicalDeviceDescriptorSetHostMappingFeaturesVALVE<'a> {
@@ -68874,6 +69076,77 @@ impl<'a> PhysicalDeviceFormatPackFeaturesARM<'a> {
 #[repr(C)]
 #[cfg_attr(feature = "debug", derive(Debug))]
 #[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceThrottleHintFeaturesSEC.html>"]
+#[must_use]
+pub struct PhysicalDeviceThrottleHintFeaturesSEC<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub throttle_hint: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceThrottleHintFeaturesSEC<'_> {}
+unsafe impl Sync for PhysicalDeviceThrottleHintFeaturesSEC<'_> {}
+impl ::core::default::Default for PhysicalDeviceThrottleHintFeaturesSEC<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            throttle_hint: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceThrottleHintFeaturesSEC<'a> {
+    const STRUCTURE_TYPE: StructureType = StructureType::PHYSICAL_DEVICE_THROTTLE_HINT_FEATURES_SEC;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceThrottleHintFeaturesSEC<'_> {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceThrottleHintFeaturesSEC<'_> {}
+impl<'a> PhysicalDeviceThrottleHintFeaturesSEC<'a> {
+    #[inline]
+    pub fn throttle_hint(mut self, throttle_hint: bool) -> Self {
+        self.throttle_hint = throttle_hint.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkThrottleHintSubmitInfoSEC.html>"]
+#[must_use]
+pub struct ThrottleHintSubmitInfoSEC<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub throttle_hint: ThrottleHintTypeSEC,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for ThrottleHintSubmitInfoSEC<'_> {}
+unsafe impl Sync for ThrottleHintSubmitInfoSEC<'_> {}
+impl ::core::default::Default for ThrottleHintSubmitInfoSEC<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            throttle_hint: ThrottleHintTypeSEC::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for ThrottleHintSubmitInfoSEC<'a> {
+    const STRUCTURE_TYPE: StructureType = StructureType::THROTTLE_HINT_SUBMIT_INFO_SEC;
+}
+unsafe impl ExtendsSubmitInfo for ThrottleHintSubmitInfoSEC<'_> {}
+impl<'a> ThrottleHintSubmitInfoSEC<'a> {
+    #[inline]
+    pub fn throttle_hint(mut self, throttle_hint: ThrottleHintTypeSEC) -> Self {
+        self.throttle_hint = throttle_hint;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkTensorDescriptionARM.html>"]
 #[must_use]
 pub struct TensorDescriptionARM<'a> {
@@ -70726,6 +70999,7 @@ unsafe impl<'a> TaggedStructure for DataGraphPipelineSessionCreateInfoARM<'a> {
     const STRUCTURE_TYPE: StructureType =
         StructureType::DATA_GRAPH_PIPELINE_SESSION_CREATE_INFO_ARM;
 }
+pub unsafe trait ExtendsDataGraphPipelineSessionCreateInfoARM {}
 impl<'a> DataGraphPipelineSessionCreateInfoARM<'a> {
     #[inline]
     pub fn flags(mut self, flags: DataGraphPipelineSessionCreateFlagsARM) -> Self {
@@ -70735,6 +71009,23 @@ impl<'a> DataGraphPipelineSessionCreateInfoARM<'a> {
     #[inline]
     pub fn data_graph_pipeline(mut self, data_graph_pipeline: Pipeline) -> Self {
         self.data_graph_pipeline = data_graph_pipeline;
+        self
+    }
+    #[doc = r" Prepends the given extension struct between the root and the first pointer. This"]
+    #[doc = r" method only exists on structs that can be passed to a function directly. Only"]
+    #[doc = r" valid extension structs can be pushed into the chain."]
+    #[doc = r" If the chain looks like `A -> B -> C`, and you call `x.push_next(&mut D)`, then the"]
+    #[doc = r" chain will look like `A -> D -> B -> C`."]
+    pub fn push_next<T: ExtendsDataGraphPipelineSessionCreateInfoARM + ?Sized>(
+        mut self,
+        next: &'a mut T,
+    ) -> Self {
+        unsafe {
+            let next_ptr = <*const T>::cast(next);
+            let last_next = ptr_chain_iter(next).last().unwrap();
+            (*last_next).p_next = self.p_next as _;
+            self.p_next = next_ptr;
+        }
         self
     }
 }

@@ -1586,6 +1586,8 @@ impl fmt::Debug for DataGraphPipelinePropertyARM {
         let name = match *self {
             Self::CREATION_LOG => Some("CREATION_LOG"),
             Self::IDENTIFIER => Some("IDENTIFIER"),
+            Self::NEURAL_ACCELERATOR_DEBUG_DATABASE => Some("NEURAL_ACCELERATOR_DEBUG_DATABASE"),
+            Self::NEURAL_ACCELERATOR_STATISTICS_INFO => Some("NEURAL_ACCELERATOR_STATISTICS_INFO"),
             _ => None,
         };
         if let Some(x) = name {
@@ -1600,6 +1602,7 @@ impl fmt::Debug for DataGraphPipelineSessionBindPointARM {
         let name = match *self {
             Self::TRANSIENT => Some("TRANSIENT"),
             Self::OPTICAL_FLOW_CACHE => Some("OPTICAL_FLOW_CACHE"),
+            Self::NEURAL_ACCELERATOR_STATISTICS => Some("NEURAL_ACCELERATOR_STATISTICS"),
             _ => None,
         };
         if let Some(x) = name {
@@ -3401,6 +3404,10 @@ impl fmt::Debug for ImageCreateFlags {
                 ImageCreateFlags::FRAGMENT_DENSITY_MAP_OFFSET_EXT.0,
                 "FRAGMENT_DENSITY_MAP_OFFSET_EXT",
             ),
+            (
+                ImageCreateFlags::ALIAS_SINGLE_LAYER_DESCRIPTOR_KHR.0,
+                "ALIAS_SINGLE_LAYER_DESCRIPTOR_KHR",
+            ),
             (ImageCreateFlags::ALIAS.0, "ALIAS"),
             (
                 ImageCreateFlags::SPLIT_INSTANCE_BIND_REGIONS.0,
@@ -4007,6 +4014,21 @@ impl fmt::Debug for MicromapTypeEXT {
         let name = match *self {
             Self::OPACITY_MICROMAP => Some("OPACITY_MICROMAP"),
             Self::DISPLACEMENT_MICROMAP_NV => Some("DISPLACEMENT_MICROMAP_NV"),
+            _ => None,
+        };
+        if let Some(x) = name {
+            f.write_str(x)
+        } else {
+            self.0.fmt(f)
+        }
+    }
+}
+impl fmt::Debug for NeuralAcceleratorStatisticsModeARM {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let name = match *self {
+            Self::DISABLED => Some("DISABLED"),
+            Self::STATISTICS0 => Some("STATISTICS0"),
+            Self::STATISTICS1 => Some("STATISTICS1"),
             _ => None,
         };
         if let Some(x) = name {
@@ -4877,10 +4899,16 @@ impl fmt::Debug for PipelineInputAssemblyStateCreateFlags {
 }
 impl fmt::Debug for PipelineLayoutCreateFlags {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        const KNOWN: &[(Flags, &str)] = &[(
-            PipelineLayoutCreateFlags::INDEPENDENT_SETS_EXT.0,
-            "INDEPENDENT_SETS_EXT",
-        )];
+        const KNOWN: &[(Flags, &str)] = &[
+            (
+                PipelineLayoutCreateFlags::INDEPENDENT_SETS_EXT.0,
+                "INDEPENDENT_SETS_EXT",
+            ),
+            (
+                PipelineLayoutCreateFlags::NO_TASK_SHADER_KHR.0,
+                "NO_TASK_SHADER_KHR",
+            ),
+        ];
         debug_flags(f, KNOWN, self.0)
     }
 }
@@ -5893,6 +5921,10 @@ impl fmt::Debug for ShaderCreateFlagsEXT {
                 "INDIRECT_BINDABLE",
             ),
             (ShaderCreateFlagsEXT::TYPE_64_INDEXING.0, "TYPE_64_INDEXING"),
+            (
+                ShaderCreateFlagsEXT::INDEPENDENT_SETS_KHR.0,
+                "INDEPENDENT_SETS_KHR",
+            ),
         ];
         debug_flags(f, KNOWN, self.0)
     }
@@ -8432,12 +8464,31 @@ impl fmt::Debug for StructureType {
             Self::PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV => {
                 Some("PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV")
             }
+            Self::PHYSICAL_DEVICE_MAINTENANCE_11_FEATURES_KHR => {
+                Some("PHYSICAL_DEVICE_MAINTENANCE_11_FEATURES_KHR")
+            }
+            Self::QUEUE_FAMILY_OPTIMAL_IMAGE_TRANSFER_GRANULARITY_PROPERTIES_KHR => {
+                Some("QUEUE_FAMILY_OPTIMAL_IMAGE_TRANSFER_GRANULARITY_PROPERTIES_KHR")
+            }
             Self::PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT => {
                 Some("PHYSICAL_DEVICE_SHADER_SUBGROUP_PARTITIONED_FEATURES_EXT")
             }
             Self::UBM_SURFACE_CREATE_INFO_SEC => Some("UBM_SURFACE_CREATE_INFO_SEC"),
             Self::PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE => {
                 Some("PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE")
+            }
+            Self::PHYSICAL_DEVICE_THROTTLE_HINT_FEATURES_SEC => {
+                Some("PHYSICAL_DEVICE_THROTTLE_HINT_FEATURES_SEC")
+            }
+            Self::THROTTLE_HINT_SUBMIT_INFO_SEC => Some("THROTTLE_HINT_SUBMIT_INFO_SEC"),
+            Self::DATA_GRAPH_PIPELINE_NEURAL_STATISTICS_CREATE_INFO_ARM => {
+                Some("DATA_GRAPH_PIPELINE_NEURAL_STATISTICS_CREATE_INFO_ARM")
+            }
+            Self::DATA_GRAPH_PIPELINE_SESSION_NEURAL_STATISTICS_CREATE_INFO_ARM => {
+                Some("DATA_GRAPH_PIPELINE_SESSION_NEURAL_STATISTICS_CREATE_INFO_ARM")
+            }
+            Self::PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM => {
+                Some("PHYSICAL_DEVICE_DATA_GRAPH_NEURAL_ACCELERATOR_STATISTICS_FEATURES_ARM")
             }
             Self::PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT => {
                 Some("PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT")
@@ -9155,6 +9206,21 @@ impl fmt::Debug for TessellationDomainOrigin {
         let name = match *self {
             Self::UPPER_LEFT => Some("UPPER_LEFT"),
             Self::LOWER_LEFT => Some("LOWER_LEFT"),
+            _ => None,
+        };
+        if let Some(x) = name {
+            f.write_str(x)
+        } else {
+            self.0.fmt(f)
+        }
+    }
+}
+impl fmt::Debug for ThrottleHintTypeSEC {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let name = match *self {
+            Self::DEFAULT => Some("DEFAULT"),
+            Self::LOW => Some("LOW"),
+            Self::HIGH => Some("HIGH"),
             _ => None,
         };
         if let Some(x) = name {
