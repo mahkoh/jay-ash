@@ -5605,6 +5605,11 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT: Self = Self(1_000_678_000);
 }
+#[doc = "Generated from 'VK_NV_cooperative_matrix_decode_vector'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV: Self =
+        Self(1_000_689_000);
+}
 pub const KHR_SURFACE_EXTENSION_NAME: &CStr = c"VK_KHR_surface";
 pub const KHR_SURFACE_SPEC_VERSION: u32 = 25u32;
 #[allow(non_camel_case_types)]
@@ -10240,3 +10245,6 @@ pub const EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]
 pub type PFN_vkCmdSetPrimitiveRestartIndexEXT =
     unsafe extern "system" fn(command_buffer: CommandBuffer, primitive_restart_index: u32);
+pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_EXTENSION_NAME: &CStr =
+    c"VK_NV_cooperative_matrix_decode_vector";
+pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_SPEC_VERSION: u32 = 1u32;
