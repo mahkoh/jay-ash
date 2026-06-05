@@ -5221,6 +5221,23 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_OPACITY_MICROMAP_FEATURES_ARM: Self = Self(1_000_596_000);
 }
+#[doc = "Generated from 'VK_KHR_video_encode_feedback2'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_VIDEO_ENCODE_FEEDBACK_2_FEATURES_KHR: Self = Self(1_000_598_000);
+    pub const VIDEO_ENCODE_FEEDBACK_2_CAPABILITIES_KHR: Self = Self(1_000_598_001);
+    pub const QUERY_POOL_VIDEO_ENCODE_PER_PARTITION_FEEDBACK_CREATE_INFO_KHR: Self =
+        Self(1_000_598_002);
+}
+#[doc = "Generated from 'VK_KHR_video_encode_feedback2'"]
+impl VideoEncodeFeedbackFlagsKHR {
+    pub const AVERAGE_QUANTIZATION: Self = Self(0b1000);
+    pub const MIN_QUANTIZATION: Self = Self(0b1_0000);
+    pub const MAX_QUANTIZATION: Self = Self(0b10_0000);
+    pub const INTRA_PIXELS: Self = Self(0b100_0000);
+    pub const INTER_PIXELS: Self = Self(0b1000_0000);
+    pub const SKIPPED_PIXELS: Self = Self(0b1_0000_0000);
+    pub const PICTURE_PARTITION_COUNT: Self = Self(0b10_0000_0000);
+}
 #[doc = "Generated from 'VK_EXT_external_memory_metal'"]
 impl ExternalMemoryHandleTypeFlags {
     pub const MTLBUFFER_EXT: Self = Self(0b1_0000_0000_0000_0000);
@@ -5313,6 +5330,16 @@ impl StructureType {
 impl StructureType {
     pub const SET_PRESENT_CONFIG_NV: Self = Self(1_000_613_000);
     pub const PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV: Self = Self(1_000_613_001);
+}
+#[doc = "Generated from 'VK_EXT_multisampled_render_to_swapchain'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SWAPCHAIN_FEATURES_EXT: Self =
+        Self(1_000_616_000);
+    pub const SWAPCHAIN_FLAGS_SURFACE_CAPABILITIES_EXT: Self = Self(1_000_616_001);
+}
+#[doc = "Generated from 'VK_EXT_multisampled_render_to_swapchain'"]
+impl SwapchainCreateFlagsKHR {
+    pub const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT: Self = Self(0b1_0000_0000);
 }
 #[doc = "Generated from 'VK_EXT_fragment_density_map_offset'"]
 impl ImageCreateFlags {
@@ -5549,6 +5576,10 @@ impl ImageCreateFlags {
     pub const ALIAS_SINGLE_LAYER_DESCRIPTOR_KHR: Self = Self(0b100_0000_0000_0000_0000_0000);
 }
 #[doc = "Generated from 'VK_KHR_maintenance11'"]
+impl ImageCreateFlags2KHR {
+    pub const ALIAS_SINGLE_LAYER_DESCRIPTOR: Self = Self(0b100_0000_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_KHR_maintenance11'"]
 impl PipelineLayoutCreateFlags {
     pub const NO_TASK_SHADER_KHR: Self = Self(0b100);
 }
@@ -5573,6 +5604,54 @@ impl SubgroupFeatureFlags {
 #[doc = "Generated from 'VK_SEC_ubm_surface'"]
 impl StructureType {
     pub const UBM_SURFACE_CREATE_INFO_SEC: Self = Self(1_000_664_000);
+}
+#[doc = "Generated from 'VK_KHR_extended_flags'"]
+impl ImageCreateFlags2KHR {
+    pub const TYPE_2D_ARRAY_COMPATIBLE: Self = Self(0b10_0000);
+    pub const SPLIT_INSTANCE_BIND_REGIONS: Self = Self(0b100_0000);
+    pub const BLOCK_TEXEL_VIEW_COMPATIBLE: Self = Self(0b1000_0000);
+    pub const EXTENDED_USAGE: Self = Self(0b1_0000_0000);
+    pub const DISJOINT: Self = Self(0b10_0000_0000);
+    pub const ALIAS: Self = Self(0b100_0000_0000);
+    pub const PROTECTED: Self = Self(0b1000_0000_0000);
+    pub const SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_EXT: Self = Self(0b1_0000_0000_0000);
+    pub const CORNER_SAMPLED_NV: Self = Self(0b10_0000_0000_0000);
+    pub const SUBSAMPLED_EXT: Self = Self(0b100_0000_0000_0000);
+    pub const FRAGMENT_DENSITY_MAP_OFFSET_EXT: Self = Self(0b1000_0000_0000_0000);
+    pub const DESCRIPTOR_BUFFER_CAPTURE_REPLAY_EXT: Self = Self(0b1_0000_0000_0000_0000);
+    pub const TYPE_2D_VIEW_COMPATIBLE_EXT: Self = Self(0b10_0000_0000_0000_0000);
+    pub const MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXT: Self = Self(0b100_0000_0000_0000_0000);
+    pub const VIDEO_PROFILE_INDEPENDENT: Self = Self(0b1_0000_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_KHR_extended_flags'"]
+impl ImageUsageFlags2KHR {
+    pub const FRAGMENT_SHADING_RATE_ATTACHMENT: Self = Self(0b1_0000_0000);
+    pub const FRAGMENT_DENSITY_MAP_EXT: Self = Self(0b10_0000_0000);
+    pub const VIDEO_DECODE_DST: Self = Self(0b100_0000_0000);
+    pub const VIDEO_DECODE_SRC: Self = Self(0b1000_0000_0000);
+    pub const VIDEO_DECODE_DPB: Self = Self(0b1_0000_0000_0000);
+    pub const VIDEO_ENCODE_DST: Self = Self(0b10_0000_0000_0000);
+    pub const VIDEO_ENCODE_SRC: Self = Self(0b100_0000_0000_0000);
+    pub const VIDEO_ENCODE_DPB: Self = Self(0b1000_0000_0000_0000);
+    pub const INVOCATION_MASK_HUAWEI: Self = Self(0b100_0000_0000_0000_0000);
+    pub const ATTACHMENT_FEEDBACK_LOOP_EXT: Self = Self(0b1000_0000_0000_0000_0000);
+    pub const SAMPLE_WEIGHT_QCOM: Self = Self(0b1_0000_0000_0000_0000_0000);
+    pub const SAMPLE_BLOCK_MATCH_QCOM: Self = Self(0b10_0000_0000_0000_0000_0000);
+    pub const HOST_TRANSFER: Self = Self(0b100_0000_0000_0000_0000_0000);
+    pub const TENSOR_ALIASING_ARM: Self = Self(0b1000_0000_0000_0000_0000_0000);
+    pub const VIDEO_ENCODE_QUANTIZATION_DELTA_MAP: Self = Self(0b10_0000_0000_0000_0000_0000_0000);
+    pub const VIDEO_ENCODE_EMPHASIS_MAP: Self = Self(0b100_0000_0000_0000_0000_0000_0000);
+    pub const TILE_MEMORY_QCOM: Self = Self(0b1000_0000_0000_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_KHR_extended_flags'"]
+impl StructureType {
+    pub const FORMAT_PROPERTIES_4_KHR: Self = Self(1_000_668_000);
+    pub const IMAGE_CREATE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1_000_668_001);
+    pub const IMAGE_USAGE_FLAGS_2_CREATE_INFO_KHR: Self = Self(1_000_668_002);
+    pub const IMAGE_VIEW_USAGE_2_CREATE_INFO_KHR: Self = Self(1_000_668_003);
+    pub const PHYSICAL_DEVICE_EXTENDED_FLAGS_FEATURES_KHR: Self = Self(1_000_668_004);
+    pub const IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR: Self = Self(1_000_668_005);
+    pub const SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR: Self = Self(1_000_668_006);
 }
 #[doc = "Generated from 'VK_VALVE_shader_mixed_float_dot_product'"]
 impl StructureType {
@@ -10074,6 +10153,8 @@ pub type PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV 
     ) -> Result;
 pub const ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION_NAME: &CStr = c"VK_ARM_pipeline_opacity_micromap";
 pub const ARM_PIPELINE_OPACITY_MICROMAP_SPEC_VERSION: u32 = 1u32;
+pub const KHR_VIDEO_ENCODE_FEEDBACK_2_EXTENSION_NAME: &CStr = c"VK_KHR_video_encode_feedback2";
+pub const KHR_VIDEO_ENCODE_FEEDBACK_2_SPEC_VERSION: u32 = 1u32;
 pub const EXT_EXTERNAL_MEMORY_METAL_EXTENSION_NAME: &CStr = c"VK_EXT_external_memory_metal";
 pub const EXT_EXTERNAL_MEMORY_METAL_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]
@@ -10156,6 +10237,9 @@ pub const KHR_ROBUSTNESS_2_EXTENSION_NAME: &CStr = c"VK_KHR_robustness2";
 pub const KHR_ROBUSTNESS_2_SPEC_VERSION: u32 = 1u32;
 pub const NV_PRESENT_METERING_EXTENSION_NAME: &CStr = c"VK_NV_present_metering";
 pub const NV_PRESENT_METERING_SPEC_VERSION: u32 = 1u32;
+pub const EXT_MULTISAMPLED_RENDER_TO_SWAPCHAIN_EXTENSION_NAME: &CStr =
+    c"VK_EXT_multisampled_render_to_swapchain";
+pub const EXT_MULTISAMPLED_RENDER_TO_SWAPCHAIN_SPEC_VERSION: u32 = 1u32;
 pub const EXT_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION_NAME: &CStr =
     c"VK_EXT_fragment_density_map_offset";
 pub const EXT_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION: u32 = 1u32;
@@ -10232,6 +10316,8 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
     queue_family_index: u32,
     device: *mut ubm_device,
 ) -> Bool32;
+pub const KHR_EXTENDED_FLAGS_EXTENSION_NAME: &CStr = c"VK_KHR_extended_flags";
+pub const KHR_EXTENDED_FLAGS_SPEC_VERSION: u32 = 1u32;
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME: &CStr =
     c"VK_VALVE_shader_mixed_float_dot_product";
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION: u32 = 1u32;
