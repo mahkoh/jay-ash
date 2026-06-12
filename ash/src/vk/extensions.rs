@@ -5238,6 +5238,11 @@ impl VideoEncodeFeedbackFlagsKHR {
     pub const SKIPPED_PIXELS: Self = Self(0b1_0000_0000);
     pub const PICTURE_PARTITION_COUNT: Self = Self(0b10_0000_0000);
 }
+#[doc = "Generated from 'VK_IMG_filter_linear_2d'"]
+impl FormatFeatureFlags2 {
+    pub const SAMPLED_IMAGE_FILTER_LINEAR_2D_IMG: Self =
+        Self(0b10_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000);
+}
 #[doc = "Generated from 'VK_EXT_external_memory_metal'"]
 impl ExternalMemoryHandleTypeFlags {
     pub const MTLBUFFER_EXT: Self = Self(0b1_0000_0000_0000_0000);
@@ -10155,6 +10160,8 @@ pub const ARM_PIPELINE_OPACITY_MICROMAP_EXTENSION_NAME: &CStr = c"VK_ARM_pipelin
 pub const ARM_PIPELINE_OPACITY_MICROMAP_SPEC_VERSION: u32 = 1u32;
 pub const KHR_VIDEO_ENCODE_FEEDBACK_2_EXTENSION_NAME: &CStr = c"VK_KHR_video_encode_feedback2";
 pub const KHR_VIDEO_ENCODE_FEEDBACK_2_SPEC_VERSION: u32 = 1u32;
+pub const IMG_FILTER_LINEAR_2D_EXTENSION_NAME: &CStr = c"VK_IMG_filter_linear_2d";
+pub const IMG_FILTER_LINEAR_2D_SPEC_VERSION: u32 = 1u32;
 pub const EXT_EXTERNAL_MEMORY_METAL_EXTENSION_NAME: &CStr = c"VK_EXT_external_memory_metal";
 pub const EXT_EXTERNAL_MEMORY_METAL_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]
