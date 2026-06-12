@@ -12253,6 +12253,14 @@ pub mod img {
             crate::vk::IMG_RELAXED_LINE_RASTERIZATION_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_IMG_filter_linear_2d"]
+    pub mod filter_linear_2d {
+        use super::super::*;
+        pub use {
+            crate::vk::IMG_FILTER_LINEAR_2D_EXTENSION_NAME as NAME,
+            crate::vk::IMG_FILTER_LINEAR_2D_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged INTEL"]
 pub mod intel {
