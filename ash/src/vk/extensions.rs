@@ -5029,6 +5029,19 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT: Self = Self(1_000_564_000);
 }
+#[doc = "Generated from 'VK_ARM_tensor_controls'"]
+impl StructureType {
+    pub const TENSOR_EXPLICIT_TILING_FORMAT_PROPERTIES_ARM: Self = Self(1_000_565_000);
+    pub const TENSOR_ROLLING_BACKING_CREATE_INFO_ARM: Self = Self(1_000_565_001);
+}
+#[doc = "Generated from 'VK_ARM_tensor_controls'"]
+impl TensorTilingARM {
+    pub const BRICK_16_WIDE: Self = Self(1_000_565_000);
+    pub const BRICK_8_WIDE: Self = Self(1_000_565_001);
+    pub const BRICK_4_WIDE: Self = Self(1_000_565_002);
+    pub const BLOCK_U_INTERLEAVED: Self = Self(1_000_565_003);
+    pub const BLOCK_U_INTERLEAVED_64K: Self = Self(1_000_565_004);
+}
 #[doc = "Generated from 'VK_EXT_shader_float8'"]
 impl ComponentTypeKHR {
     pub const FLOAT8_E4M3_EXT: Self = Self(1_000_491_002);
@@ -10013,6 +10026,8 @@ pub const NV_SHADER_ATOMIC_FLOAT16_VECTOR_SPEC_VERSION: u32 = 1u32;
 pub const EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION_NAME: &CStr =
     c"VK_EXT_shader_replicated_composites";
 pub const EXT_SHADER_REPLICATED_COMPOSITES_SPEC_VERSION: u32 = 1u32;
+pub const ARM_TENSOR_CONTROLS_EXTENSION_NAME: &CStr = c"VK_ARM_tensor_controls";
+pub const ARM_TENSOR_CONTROLS_SPEC_VERSION: u32 = 1u32;
 pub const EXT_SHADER_FLOAT8_EXTENSION_NAME: &CStr = c"VK_EXT_shader_float8";
 pub const EXT_SHADER_FLOAT8_SPEC_VERSION: u32 = 1u32;
 pub const NV_RAY_TRACING_VALIDATION_EXTENSION_NAME: &CStr = c"VK_NV_ray_tracing_validation";

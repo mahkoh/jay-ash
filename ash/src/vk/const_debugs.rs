@@ -8475,6 +8475,12 @@ impl fmt::Debug for StructureType {
             Self::PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT => {
                 Some("PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT")
             }
+            Self::TENSOR_EXPLICIT_TILING_FORMAT_PROPERTIES_ARM => {
+                Some("TENSOR_EXPLICIT_TILING_FORMAT_PROPERTIES_ARM")
+            }
+            Self::TENSOR_ROLLING_BACKING_CREATE_INFO_ARM => {
+                Some("TENSOR_ROLLING_BACKING_CREATE_INFO_ARM")
+            }
             Self::PHYSICAL_DEVICE_SHADER_FLOAT8_FEATURES_EXT => {
                 Some("PHYSICAL_DEVICE_SHADER_FLOAT8_FEATURES_EXT")
             }
@@ -9539,6 +9545,11 @@ impl fmt::Debug for TensorTilingARM {
         let name = match *self {
             Self::OPTIMAL => Some("OPTIMAL"),
             Self::LINEAR => Some("LINEAR"),
+            Self::BRICK_16_WIDE => Some("BRICK_16_WIDE"),
+            Self::BRICK_8_WIDE => Some("BRICK_8_WIDE"),
+            Self::BRICK_4_WIDE => Some("BRICK_4_WIDE"),
+            Self::BLOCK_U_INTERLEAVED => Some("BLOCK_U_INTERLEAVED"),
+            Self::BLOCK_U_INTERLEAVED_64K => Some("BLOCK_U_INTERLEAVED_64K"),
             _ => None,
         };
         if let Some(x) = name {
