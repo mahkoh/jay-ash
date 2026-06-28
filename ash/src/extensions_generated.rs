@@ -2109,6 +2109,14 @@ pub mod arm {
             }
         }
     }
+    #[doc = "VK_ARM_tensor_controls"]
+    pub mod tensor_controls {
+        use super::super::*;
+        pub use {
+            crate::vk::ARM_TENSOR_CONTROLS_EXTENSION_NAME as NAME,
+            crate::vk::ARM_TENSOR_CONTROLS_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
     #[doc = "VK_ARM_pipeline_opacity_micromap"]
     pub mod pipeline_opacity_micromap {
         use super::super::*;

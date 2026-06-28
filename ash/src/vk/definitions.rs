@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 354;
+pub const HEADER_VERSION: u32 = 355;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -57880,6 +57880,123 @@ impl<'a> DataGraphPipelineSessionNeuralStatisticsCreateInfoARM<'a> {
     #[inline]
     pub fn mode(mut self, mode: NeuralAcceleratorStatisticsModeARM) -> Self {
         self.mode = mode;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkTensorExplicitTilingFormatPropertiesARM.html>"]
+#[must_use]
+pub struct TensorExplicitTilingFormatPropertiesARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub brick16_tiling_tensor_features: FormatFeatureFlags2,
+    pub brick8_tiling_tensor_features: FormatFeatureFlags2,
+    pub brick4_tiling_tensor_features: FormatFeatureFlags2,
+    pub block_u_tiling_tensor_features: FormatFeatureFlags2,
+    pub block_u64k_tiling_tensor_features: FormatFeatureFlags2,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for TensorExplicitTilingFormatPropertiesARM<'_> {}
+unsafe impl Sync for TensorExplicitTilingFormatPropertiesARM<'_> {}
+impl ::core::default::Default for TensorExplicitTilingFormatPropertiesARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            brick16_tiling_tensor_features: FormatFeatureFlags2::default(),
+            brick8_tiling_tensor_features: FormatFeatureFlags2::default(),
+            brick4_tiling_tensor_features: FormatFeatureFlags2::default(),
+            block_u_tiling_tensor_features: FormatFeatureFlags2::default(),
+            block_u64k_tiling_tensor_features: FormatFeatureFlags2::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for TensorExplicitTilingFormatPropertiesARM<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::TENSOR_EXPLICIT_TILING_FORMAT_PROPERTIES_ARM;
+}
+unsafe impl ExtendsFormatProperties2 for TensorExplicitTilingFormatPropertiesARM<'_> {}
+impl<'a> TensorExplicitTilingFormatPropertiesARM<'a> {
+    #[inline]
+    pub fn brick16_tiling_tensor_features(
+        mut self,
+        brick16_tiling_tensor_features: FormatFeatureFlags2,
+    ) -> Self {
+        self.brick16_tiling_tensor_features = brick16_tiling_tensor_features;
+        self
+    }
+    #[inline]
+    pub fn brick8_tiling_tensor_features(
+        mut self,
+        brick8_tiling_tensor_features: FormatFeatureFlags2,
+    ) -> Self {
+        self.brick8_tiling_tensor_features = brick8_tiling_tensor_features;
+        self
+    }
+    #[inline]
+    pub fn brick4_tiling_tensor_features(
+        mut self,
+        brick4_tiling_tensor_features: FormatFeatureFlags2,
+    ) -> Self {
+        self.brick4_tiling_tensor_features = brick4_tiling_tensor_features;
+        self
+    }
+    #[inline]
+    pub fn block_u_tiling_tensor_features(
+        mut self,
+        block_u_tiling_tensor_features: FormatFeatureFlags2,
+    ) -> Self {
+        self.block_u_tiling_tensor_features = block_u_tiling_tensor_features;
+        self
+    }
+    #[inline]
+    pub fn block_u64k_tiling_tensor_features(
+        mut self,
+        block_u64k_tiling_tensor_features: FormatFeatureFlags2,
+    ) -> Self {
+        self.block_u64k_tiling_tensor_features = block_u64k_tiling_tensor_features;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkTensorRollingBackingCreateInfoARM.html>"]
+#[must_use]
+pub struct TensorRollingBackingCreateInfoARM<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub wraps: [u32; MAX_TENSOR_CREATE_INFO_ROLLING_BACKING_WRAP_COUNT_ARM],
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for TensorRollingBackingCreateInfoARM<'_> {}
+unsafe impl Sync for TensorRollingBackingCreateInfoARM<'_> {}
+impl ::core::default::Default for TensorRollingBackingCreateInfoARM<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            wraps: unsafe { ::core::mem::zeroed() },
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for TensorRollingBackingCreateInfoARM<'a> {
+    const STRUCTURE_TYPE: StructureType = StructureType::TENSOR_ROLLING_BACKING_CREATE_INFO_ARM;
+}
+unsafe impl ExtendsTensorCreateInfoARM for TensorRollingBackingCreateInfoARM<'_> {}
+impl<'a> TensorRollingBackingCreateInfoARM<'a> {
+    #[inline]
+    pub fn wraps(
+        mut self,
+        wraps: [u32; MAX_TENSOR_CREATE_INFO_ROLLING_BACKING_WRAP_COUNT_ARM],
+    ) -> Self {
+        self.wraps = wraps;
         self
     }
 }
