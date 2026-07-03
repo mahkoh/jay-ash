@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 355;
+pub const HEADER_VERSION: u32 = 356;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -77940,6 +77940,67 @@ impl<'a> DataGraphPipelineOpticalFlowDispatchInfoARM<'a> {
     #[inline]
     pub fn mean_flow_l1_norm_hint(mut self, mean_flow_l1_norm_hint: u32) -> Self {
         self.mean_flow_l1_norm_hint = mean_flow_l1_norm_hint;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT.html>"]
+#[must_use]
+pub struct PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub shader_float4: Bool32,
+    pub shader_float6: Bool32,
+    pub shader_float8_unsigned_e8m0: Bool32,
+    pub shader_mx_int8: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'_> {}
+unsafe impl Sync for PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'_> {}
+impl ::core::default::Default for PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            shader_float4: Bool32::default(),
+            shader_float6: Bool32::default(),
+            shader_float8_unsigned_e8m0: Bool32::default(),
+            shader_mx_int8: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2
+    for PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'_>
+{
+}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'_> {}
+impl<'a> PhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT<'a> {
+    #[inline]
+    pub fn shader_float4(mut self, shader_float4: bool) -> Self {
+        self.shader_float4 = shader_float4.into();
+        self
+    }
+    #[inline]
+    pub fn shader_float6(mut self, shader_float6: bool) -> Self {
+        self.shader_float6 = shader_float6.into();
+        self
+    }
+    #[inline]
+    pub fn shader_float8_unsigned_e8m0(mut self, shader_float8_unsigned_e8m0: bool) -> Self {
+        self.shader_float8_unsigned_e8m0 = shader_float8_unsigned_e8m0.into();
+        self
+    }
+    #[inline]
+    pub fn shader_mx_int8(mut self, shader_mx_int8: bool) -> Self {
+        self.shader_mx_int8 = shader_mx_int8.into();
         self
     }
 }

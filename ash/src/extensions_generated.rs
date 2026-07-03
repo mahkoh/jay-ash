@@ -11272,6 +11272,14 @@ pub mod ext {
             crate::vk::EXT_SHADER_SUBGROUP_PARTITIONED_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_EXT_shader_ocp_microscaling_types"]
+    pub mod shader_ocp_microscaling_types {
+        use super::super::*;
+        pub use {
+            crate::vk::EXT_SHADER_OCP_MICROSCALING_TYPES_EXTENSION_NAME as NAME,
+            crate::vk::EXT_SHADER_OCP_MICROSCALING_TYPES_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
     #[doc = "VK_EXT_primitive_restart_index"]
     pub mod primitive_restart_index {
         use super::super::*;
