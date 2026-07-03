@@ -1305,6 +1305,11 @@ impl fmt::Debug for ComponentTypeKHR {
             Self::UINT8_PACKED_NV => Some("UINT8_PACKED_NV"),
             Self::FLOAT8_E4M3_EXT => Some("FLOAT8_E4M3_EXT"),
             Self::FLOAT8_E5M2_EXT => Some("FLOAT8_E5M2_EXT"),
+            Self::FLOAT6_E2M3_EXT => Some("FLOAT6_E2M3_EXT"),
+            Self::FLOAT6_E3M2_EXT => Some("FLOAT6_E3M2_EXT"),
+            Self::FLOAT4_E2M1_EXT => Some("FLOAT4_E2M1_EXT"),
+            Self::FLOAT8_UNSIGNED_E8M0_EXT => Some("FLOAT8_UNSIGNED_E8M0_EXT"),
+            Self::MXINT8_EXT => Some("MXINT8_EXT"),
             _ => None,
         };
         if let Some(x) = name {
@@ -8840,6 +8845,9 @@ impl fmt::Debug for StructureType {
             }
             Self::SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR => {
                 Some("SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR")
+            }
+            Self::PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT => {
+                Some("PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT")
             }
             Self::PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE => {
                 Some("PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE")

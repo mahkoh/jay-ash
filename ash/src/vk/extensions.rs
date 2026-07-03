@@ -5671,6 +5671,19 @@ impl StructureType {
     pub const IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR: Self = Self(1_000_668_005);
     pub const SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR: Self = Self(1_000_668_006);
 }
+#[doc = "Generated from 'VK_EXT_shader_ocp_microscaling_types'"]
+impl ComponentTypeKHR {
+    pub const FLOAT6_E2M3_EXT: Self = Self(1_000_672_000);
+    pub const FLOAT6_E3M2_EXT: Self = Self(1_000_672_001);
+    pub const FLOAT4_E2M1_EXT: Self = Self(1_000_672_002);
+    pub const FLOAT8_UNSIGNED_E8M0_EXT: Self = Self(1_000_672_003);
+    pub const MXINT8_EXT: Self = Self(1_000_672_004);
+}
+#[doc = "Generated from 'VK_EXT_shader_ocp_microscaling_types'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT: Self =
+        Self(1_000_672_000);
+}
 #[doc = "Generated from 'VK_VALVE_shader_mixed_float_dot_product'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE: Self =
@@ -10340,6 +10353,9 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
 ) -> Bool32;
 pub const KHR_EXTENDED_FLAGS_EXTENSION_NAME: &CStr = c"VK_KHR_extended_flags";
 pub const KHR_EXTENDED_FLAGS_SPEC_VERSION: u32 = 1u32;
+pub const EXT_SHADER_OCP_MICROSCALING_TYPES_EXTENSION_NAME: &CStr =
+    c"VK_EXT_shader_ocp_microscaling_types";
+pub const EXT_SHADER_OCP_MICROSCALING_TYPES_SPEC_VERSION: u32 = 1u32;
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME: &CStr =
     c"VK_VALVE_shader_mixed_float_dot_product";
 pub const VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION: u32 = 1u32;
