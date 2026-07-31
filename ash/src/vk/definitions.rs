@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 357;
+pub const HEADER_VERSION: u32 = 358;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -77944,6 +77944,78 @@ impl<'a> DataGraphPipelineOpticalFlowDispatchInfoARM<'a> {
     #[inline]
     pub fn mean_flow_l1_norm_hint(mut self, mean_flow_l1_norm_hint: u32) -> Self {
         self.mean_flow_l1_norm_hint = mean_flow_l1_norm_hint;
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceImageTilingControlFeaturesEXT.html>"]
+#[must_use]
+pub struct PhysicalDeviceImageTilingControlFeaturesEXT<'a> {
+    pub s_type: StructureType,
+    pub p_next: *mut c_void,
+    pub image_tiling_control: Bool32,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for PhysicalDeviceImageTilingControlFeaturesEXT<'_> {}
+unsafe impl Sync for PhysicalDeviceImageTilingControlFeaturesEXT<'_> {}
+impl ::core::default::Default for PhysicalDeviceImageTilingControlFeaturesEXT<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null_mut(),
+            image_tiling_control: Bool32::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for PhysicalDeviceImageTilingControlFeaturesEXT<'a> {
+    const STRUCTURE_TYPE: StructureType =
+        StructureType::PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT;
+}
+unsafe impl ExtendsPhysicalDeviceFeatures2 for PhysicalDeviceImageTilingControlFeaturesEXT<'_> {}
+unsafe impl ExtendsDeviceCreateInfo for PhysicalDeviceImageTilingControlFeaturesEXT<'_> {}
+impl<'a> PhysicalDeviceImageTilingControlFeaturesEXT<'a> {
+    #[inline]
+    pub fn image_tiling_control(mut self, image_tiling_control: bool) -> Self {
+        self.image_tiling_control = image_tiling_control.into();
+        self
+    }
+}
+#[repr(C)]
+#[cfg_attr(feature = "debug", derive(Debug))]
+#[derive(Copy, Clone)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageTilingControlCreateInfoEXT.html>"]
+#[must_use]
+pub struct ImageTilingControlCreateInfoEXT<'a> {
+    pub s_type: StructureType,
+    pub p_next: *const c_void,
+    pub tiling_control: ImageTilingControlEXT,
+    pub _marker: PhantomData<&'a ()>,
+}
+unsafe impl Send for ImageTilingControlCreateInfoEXT<'_> {}
+unsafe impl Sync for ImageTilingControlCreateInfoEXT<'_> {}
+impl ::core::default::Default for ImageTilingControlCreateInfoEXT<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self {
+            s_type: Self::STRUCTURE_TYPE,
+            p_next: ::core::ptr::null(),
+            tiling_control: ImageTilingControlEXT::default(),
+            _marker: PhantomData,
+        }
+    }
+}
+unsafe impl<'a> TaggedStructure for ImageTilingControlCreateInfoEXT<'a> {
+    const STRUCTURE_TYPE: StructureType = StructureType::IMAGE_TILING_CONTROL_CREATE_INFO_EXT;
+}
+unsafe impl ExtendsImageCreateInfo for ImageTilingControlCreateInfoEXT<'_> {}
+impl<'a> ImageTilingControlCreateInfoEXT<'a> {
+    #[inline]
+    pub fn tiling_control(mut self, tiling_control: ImageTilingControlEXT) -> Self {
+        self.tiling_control = tiling_control;
         self
     }
 }

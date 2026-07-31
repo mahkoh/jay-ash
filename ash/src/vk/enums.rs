@@ -3724,6 +3724,25 @@ impl NeuralAcceleratorStatisticsModeARM {
     pub const STATISTICS0: Self = Self(1);
     pub const STATISTICS1: Self = Self(2);
 }
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageTilingControlEXT.html>"]
+pub struct ImageTilingControlEXT(pub(crate) i32);
+impl ImageTilingControlEXT {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl ImageTilingControlEXT {
+    pub const DEFAULT: Self = Self(0);
+    pub const MIN_SIZE: Self = Self(1);
+    pub const MAX_PERFORMANCE: Self = Self(2);
+}
 impl fmt::Debug for ObjectType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = match *self {

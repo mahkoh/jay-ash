@@ -11349,6 +11349,14 @@ pub mod ext {
             }
         }
     }
+    #[doc = "VK_EXT_image_tiling_control"]
+    pub mod image_tiling_control {
+        use super::super::*;
+        pub use {
+            crate::vk::EXT_IMAGE_TILING_CONTROL_EXTENSION_NAME as NAME,
+            crate::vk::EXT_IMAGE_TILING_CONTROL_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged FUCHSIA"]
 pub mod fuchsia {
