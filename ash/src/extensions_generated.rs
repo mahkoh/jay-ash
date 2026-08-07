@@ -11264,6 +11264,78 @@ pub mod ext {
             crate::vk::EXT_SHADER_UNIFORM_BUFFER_UNSIZED_ARRAY_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_EXT_cooperative_matrix_maintenance1"]
+    pub mod cooperative_matrix_maintenance1 {
+        use super::super::*;
+        pub use {
+            crate::vk::EXT_COOPERATIVE_MATRIX_MAINTENANCE_1_EXTENSION_NAME as NAME,
+            crate::vk::EXT_COOPERATIVE_MATRIX_MAINTENANCE_1_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_EXT_cooperative_matrix_maintenance1 instance-level functions"]
+        #[derive(Clone)]
+        pub struct Instance {
+            pub(crate) fp: InstanceFn,
+            pub(crate) handle: crate::vk::Instance,
+        }
+        impl Instance {
+            pub fn new(entry: &crate::Entry, instance: &crate::Instance) -> Self {
+                let handle = instance.handle();
+                let fp = InstanceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        entry.get_instance_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &InstanceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn instance(&self) -> crate::vk::Instance {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_EXT_cooperative_matrix_maintenance1 instance-level function pointers"]
+        pub struct InstanceFn {
+            pub get_physical_device_cooperative_matrix_properties2_ext:
+                PFN_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT,
+        }
+        unsafe impl Send for InstanceFn {}
+        unsafe impl Sync for InstanceFn {}
+        impl InstanceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    get_physical_device_cooperative_matrix_properties2_ext: unsafe {
+                        unsafe extern "system" fn get_physical_device_cooperative_matrix_properties2_ext(
+                            _physical_device: PhysicalDevice,
+                            _p_cooperative_matrix_info : * const PhysicalDeviceCooperativeMatrixInfo2EXT < '_ >,
+                            _p_property_count: *mut u32,
+                            _p_properties: *mut CooperativeMatrixProperties2EXT<'_>,
+                        ) -> Result {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_physical_device_cooperative_matrix_properties2_ext)
+                            ))
+                        }
+                        let val = _f(c"vkGetPhysicalDeviceCooperativeMatrixProperties2EXT");
+                        if val.is_null() {
+                            get_physical_device_cooperative_matrix_properties2_ext
+                        } else {
+                            ::core::mem::transmute::<
+                                *const c_void,
+                                PFN_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT,
+                            >(val)
+                        }
+                    },
+                }
+            }
+        }
+    }
     #[doc = "VK_EXT_shader_subgroup_partitioned"]
     pub mod shader_subgroup_partitioned {
         use super::super::*;
