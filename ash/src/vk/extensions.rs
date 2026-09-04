@@ -4513,7 +4513,7 @@ impl StructureType {
 #[doc = "Generated from 'VK_EXT_pipeline_library_group_handles'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT: Self =
-        Self(1_000_498_000);
+        Self::PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_KHR;
 }
 #[doc = "Generated from 'VK_EXT_dynamic_rendering_unused_attachments'"]
 impl StructureType {
@@ -5589,6 +5589,11 @@ impl StructureType {
     pub const COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV: Self = Self(1_000_645_000);
     pub const PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: Self = Self(1_000_645_001);
 }
+#[doc = "Generated from 'VK_KHR_pipeline_library_group_handles'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_KHR: Self =
+        Self(1_000_498_000);
+}
 #[doc = "Generated from 'VK_KHR_maintenance11'"]
 impl ImageCreateFlags {
     pub const ALIAS_SINGLE_LAYER_DESCRIPTOR_KHR: Self = Self(0b100_0000_0000_0000_0000_0000);
@@ -5743,6 +5748,14 @@ impl PrivateDataSlotCreateFlags {
 #[doc = "Generated from 'VK_NV_private_data_base_handle'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV: Self = Self(1_000_707_000);
+}
+#[doc = "Generated from 'VK_VALVE_buffer_device_address_allocation_alignment'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE: Self =
+        Self(1_000_709_000);
+    pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_PROPERTIES_VALVE: Self =
+        Self(1_000_709_001);
+    pub const BUFFER_DEVICE_ADDRESS_ALIGNMENT_ALLOCATE_INFO_VALVE: Self = Self(1_000_709_002);
 }
 pub const KHR_SURFACE_EXTENSION_NAME: &CStr = c"VK_KHR_surface";
 pub const KHR_SURFACE_SPEC_VERSION: u32 = 25u32;
@@ -10379,6 +10392,9 @@ pub type PFN_vkCmdSetComputeOccupancyPriorityNV = unsafe extern "system" fn(
     command_buffer: CommandBuffer,
     p_parameters: *const ComputeOccupancyPriorityParametersNV<'_>,
 );
+pub const KHR_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION_NAME: &CStr =
+    c"VK_KHR_pipeline_library_group_handles";
+pub const KHR_PIPELINE_LIBRARY_GROUP_HANDLES_SPEC_VERSION: u32 = 1u32;
 pub const KHR_MAINTENANCE_11_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance11";
 pub const KHR_MAINTENANCE_11_SPEC_VERSION: u32 = 1u32;
 pub const EXT_COOPERATIVE_MATRIX_MAINTENANCE_1_EXTENSION_NAME: &CStr =
@@ -10435,3 +10451,6 @@ pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_EXTENSION_NAME: &CStr =
 pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_SPEC_VERSION: u32 = 1u32;
 pub const NV_PRIVATE_DATA_BASE_HANDLE_EXTENSION_NAME: &CStr = c"VK_NV_private_data_base_handle";
 pub const NV_PRIVATE_DATA_BASE_HANDLE_SPEC_VERSION: u32 = 1u32;
+pub const VALVE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_EXTENSION_NAME: &CStr =
+    c"VK_VALVE_buffer_device_address_allocation_alignment";
+pub const VALVE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_SPEC_VERSION: u32 = 1u32;

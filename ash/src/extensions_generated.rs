@@ -21274,6 +21274,14 @@ pub mod khr {
             }
         }
     }
+    #[doc = "VK_KHR_pipeline_library_group_handles"]
+    pub mod pipeline_library_group_handles {
+        use super::super::*;
+        pub use {
+            crate::vk::KHR_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION_NAME as NAME,
+            crate::vk::KHR_PIPELINE_LIBRARY_GROUP_HANDLES_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
     #[doc = "VK_KHR_maintenance11"]
     pub mod maintenance11 {
         use super::super::*;
@@ -26334,6 +26342,14 @@ pub mod valve {
         pub use {
             crate::vk::VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_EXTENSION_NAME as NAME,
             crate::vk::VALVE_SHADER_MIXED_FLOAT_DOT_PRODUCT_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
+    #[doc = "VK_VALVE_buffer_device_address_allocation_alignment"]
+    pub mod buffer_device_address_allocation_alignment {
+        use super::super::*;
+        pub use {
+            crate::vk::VALVE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_EXTENSION_NAME as NAME,
+            crate::vk::VALVE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_SPEC_VERSION as SPEC_VERSION,
         };
     }
 }
