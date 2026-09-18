@@ -5749,6 +5749,10 @@ impl PrivateDataSlotCreateFlags {
 impl StructureType {
     pub const PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV: Self = Self(1_000_707_000);
 }
+#[doc = "Generated from 'VK_INTEL_device_info'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL: Self = Self(1_000_708_000);
+}
 #[doc = "Generated from 'VK_VALVE_buffer_device_address_allocation_alignment'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_FEATURES_VALVE: Self =
@@ -10451,6 +10455,8 @@ pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_EXTENSION_NAME: &CStr =
 pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_SPEC_VERSION: u32 = 1u32;
 pub const NV_PRIVATE_DATA_BASE_HANDLE_EXTENSION_NAME: &CStr = c"VK_NV_private_data_base_handle";
 pub const NV_PRIVATE_DATA_BASE_HANDLE_SPEC_VERSION: u32 = 1u32;
+pub const INTEL_DEVICE_INFO_EXTENSION_NAME: &CStr = c"VK_INTEL_device_info";
+pub const INTEL_DEVICE_INFO_SPEC_VERSION: u32 = 1u32;
 pub const VALVE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_EXTENSION_NAME: &CStr =
     c"VK_VALVE_buffer_device_address_allocation_alignment";
 pub const VALVE_BUFFER_DEVICE_ADDRESS_ALLOCATION_ALIGNMENT_SPEC_VERSION: u32 = 1u32;

@@ -12607,6 +12607,14 @@ pub mod intel {
             }
         }
     }
+    #[doc = "VK_INTEL_device_info"]
+    pub mod device_info {
+        use super::super::*;
+        pub use {
+            crate::vk::INTEL_DEVICE_INFO_EXTENSION_NAME as NAME,
+            crate::vk::INTEL_DEVICE_INFO_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged KHR"]
 pub mod khr {
