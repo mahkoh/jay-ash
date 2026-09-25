@@ -56,7 +56,7 @@ pub const API_VERSION_1_3: u32 = make_api_version(0, 1, 3, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_API_VERSION_1_4.html>"]
 pub const API_VERSION_1_4: u32 = make_api_version(0, 1, 4, 0);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION.html>"]
-pub const HEADER_VERSION: u32 = 363;
+pub const HEADER_VERSION: u32 = 364;
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VK_HEADER_VERSION_COMPLETE.html>"]
 pub const HEADER_VERSION_COMPLETE: u32 = make_api_version(0, 1, 4, HEADER_VERSION);
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSampleMask.html>"]
@@ -4291,6 +4291,7 @@ impl ::core::default::Default for ComputePipelineCreateInfo<'_> {
 unsafe impl<'a> TaggedStructure for ComputePipelineCreateInfo<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::COMPUTE_PIPELINE_CREATE_INFO;
 }
+unsafe impl ExtendsPipelineCreateInfoKHR for ComputePipelineCreateInfo<'_> {}
 pub unsafe trait ExtendsComputePipelineCreateInfo {}
 impl<'a> ComputePipelineCreateInfo<'a> {
     #[inline]
@@ -5369,6 +5370,7 @@ impl ::core::default::Default for GraphicsPipelineCreateInfo<'_> {
 unsafe impl<'a> TaggedStructure for GraphicsPipelineCreateInfo<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::GRAPHICS_PIPELINE_CREATE_INFO;
 }
+unsafe impl ExtendsPipelineCreateInfoKHR for GraphicsPipelineCreateInfo<'_> {}
 pub unsafe trait ExtendsGraphicsPipelineCreateInfo {}
 impl<'a> GraphicsPipelineCreateInfo<'a> {
     #[inline]
@@ -6019,7 +6021,23 @@ impl ::core::default::Default for PipelineCreateInfoKHR<'_> {
 unsafe impl<'a> TaggedStructure for PipelineCreateInfoKHR<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::PIPELINE_CREATE_INFO_KHR;
 }
-impl<'a> PipelineCreateInfoKHR<'a> {}
+pub unsafe trait ExtendsPipelineCreateInfoKHR {}
+impl<'a> PipelineCreateInfoKHR<'a> {
+    #[doc = r" Prepends the given extension struct between the root and the first pointer. This"]
+    #[doc = r" method only exists on structs that can be passed to a function directly. Only"]
+    #[doc = r" valid extension structs can be pushed into the chain."]
+    #[doc = r" If the chain looks like `A -> B -> C`, and you call `x.push_next(&mut D)`, then the"]
+    #[doc = r" chain will look like `A -> D -> B -> C`."]
+    pub fn push_next<T: ExtendsPipelineCreateInfoKHR + ?Sized>(mut self, next: &'a mut T) -> Self {
+        unsafe {
+            let next_ptr = <*mut T>::cast(next);
+            let last_next = ptr_chain_iter(next).last().unwrap();
+            (*last_next).p_next = self.p_next as _;
+            self.p_next = next_ptr;
+        }
+        self
+    }
+}
 #[repr(C)]
 #[cfg_attr(feature = "debug", derive(Debug))]
 #[derive(Copy, Clone)]
@@ -28803,6 +28821,7 @@ impl ::core::default::Default for RayTracingPipelineCreateInfoKHR<'_> {
 unsafe impl<'a> TaggedStructure for RayTracingPipelineCreateInfoKHR<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::RAY_TRACING_PIPELINE_CREATE_INFO_KHR;
 }
+unsafe impl ExtendsPipelineCreateInfoKHR for RayTracingPipelineCreateInfoKHR<'_> {}
 pub unsafe trait ExtendsRayTracingPipelineCreateInfoKHR {}
 impl<'a> RayTracingPipelineCreateInfoKHR<'a> {
     #[inline]
@@ -44813,6 +44832,7 @@ unsafe impl<'a> TaggedStructure for MemoryBarrier2<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::MEMORY_BARRIER_2;
 }
 unsafe impl ExtendsSubpassDependency2 for MemoryBarrier2<'_> {}
+pub unsafe trait ExtendsMemoryBarrier2 {}
 impl<'a> MemoryBarrier2<'a> {
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
@@ -44832,6 +44852,20 @@ impl<'a> MemoryBarrier2<'a> {
     #[inline]
     pub fn dst_access_mask(mut self, dst_access_mask: AccessFlags2) -> Self {
         self.dst_access_mask = dst_access_mask;
+        self
+    }
+    #[doc = r" Prepends the given extension struct between the root and the first pointer. This"]
+    #[doc = r" method only exists on structs that can be passed to a function directly. Only"]
+    #[doc = r" valid extension structs can be pushed into the chain."]
+    #[doc = r" If the chain looks like `A -> B -> C`, and you call `x.push_next(&mut D)`, then the"]
+    #[doc = r" chain will look like `A -> D -> B -> C`."]
+    pub fn push_next<T: ExtendsMemoryBarrier2 + ?Sized>(mut self, next: &'a mut T) -> Self {
+        unsafe {
+            let next_ptr = <*const T>::cast(next);
+            let last_next = ptr_chain_iter(next).last().unwrap();
+            (*last_next).p_next = self.p_next as _;
+            self.p_next = next_ptr;
+        }
         self
     }
 }
@@ -45084,7 +45118,8 @@ unsafe impl<'a> TaggedStructure for MemoryBarrierAccessFlags3KHR<'a> {
 unsafe impl ExtendsSubpassDependency2 for MemoryBarrierAccessFlags3KHR<'_> {}
 unsafe impl ExtendsBufferMemoryBarrier2 for MemoryBarrierAccessFlags3KHR<'_> {}
 unsafe impl ExtendsImageMemoryBarrier2 for MemoryBarrierAccessFlags3KHR<'_> {}
-unsafe impl ExtendsMemoryRangeBarriersInfoKHR for MemoryBarrierAccessFlags3KHR<'_> {}
+unsafe impl ExtendsMemoryBarrier2 for MemoryBarrierAccessFlags3KHR<'_> {}
+unsafe impl ExtendsMemoryRangeBarrierKHR for MemoryBarrierAccessFlags3KHR<'_> {}
 impl<'a> MemoryBarrierAccessFlags3KHR<'a> {
     #[inline]
     pub fn src_access_mask3(mut self, src_access_mask3: AccessFlags3KHR) -> Self {
@@ -65647,6 +65682,7 @@ impl ::core::default::Default for ExecutionGraphPipelineCreateInfoAMDX<'_> {
 unsafe impl<'a> TaggedStructure for ExecutionGraphPipelineCreateInfoAMDX<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX;
 }
+unsafe impl ExtendsPipelineCreateInfoKHR for ExecutionGraphPipelineCreateInfoAMDX<'_> {}
 pub unsafe trait ExtendsExecutionGraphPipelineCreateInfoAMDX {}
 impl<'a> ExecutionGraphPipelineCreateInfoAMDX<'a> {
     #[inline]
@@ -76826,7 +76862,6 @@ unsafe impl<'a> TaggedStructure for MemoryRangeBarriersInfoKHR<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::MEMORY_RANGE_BARRIERS_INFO_KHR;
 }
 unsafe impl ExtendsDependencyInfo for MemoryRangeBarriersInfoKHR<'_> {}
-pub unsafe trait ExtendsMemoryRangeBarriersInfoKHR {}
 impl<'a> MemoryRangeBarriersInfoKHR<'a> {
     #[inline]
     pub fn memory_range_barriers(
@@ -76835,23 +76870,6 @@ impl<'a> MemoryRangeBarriersInfoKHR<'a> {
     ) -> Self {
         self.memory_range_barrier_count = memory_range_barriers.len() as _;
         self.p_memory_range_barriers = memory_range_barriers.as_ptr();
-        self
-    }
-    #[doc = r" Prepends the given extension struct between the root and the first pointer. This"]
-    #[doc = r" method only exists on structs that can be passed to a function directly. Only"]
-    #[doc = r" valid extension structs can be pushed into the chain."]
-    #[doc = r" If the chain looks like `A -> B -> C`, and you call `x.push_next(&mut D)`, then the"]
-    #[doc = r" chain will look like `A -> D -> B -> C`."]
-    pub fn push_next<T: ExtendsMemoryRangeBarriersInfoKHR + ?Sized>(
-        mut self,
-        next: &'a mut T,
-    ) -> Self {
-        unsafe {
-            let next_ptr = <*const T>::cast(next);
-            let last_next = ptr_chain_iter(next).last().unwrap();
-            (*last_next).p_next = self.p_next as _;
-            self.p_next = next_ptr;
-        }
         self
     }
 }
@@ -76896,6 +76914,7 @@ impl ::core::default::Default for MemoryRangeBarrierKHR<'_> {
 unsafe impl<'a> TaggedStructure for MemoryRangeBarrierKHR<'a> {
     const STRUCTURE_TYPE: StructureType = StructureType::MEMORY_RANGE_BARRIER_KHR;
 }
+pub unsafe trait ExtendsMemoryRangeBarrierKHR {}
 impl<'a> MemoryRangeBarrierKHR<'a> {
     #[inline]
     pub fn src_stage_mask(mut self, src_stage_mask: PipelineStageFlags2) -> Self {
@@ -76935,6 +76954,20 @@ impl<'a> MemoryRangeBarrierKHR<'a> {
     #[inline]
     pub fn address_flags(mut self, address_flags: AddressCommandFlagsKHR) -> Self {
         self.address_flags = address_flags;
+        self
+    }
+    #[doc = r" Prepends the given extension struct between the root and the first pointer. This"]
+    #[doc = r" method only exists on structs that can be passed to a function directly. Only"]
+    #[doc = r" valid extension structs can be pushed into the chain."]
+    #[doc = r" If the chain looks like `A -> B -> C`, and you call `x.push_next(&mut D)`, then the"]
+    #[doc = r" chain will look like `A -> D -> B -> C`."]
+    pub fn push_next<T: ExtendsMemoryRangeBarrierKHR + ?Sized>(mut self, next: &'a mut T) -> Self {
+        unsafe {
+            let next_ptr = <*const T>::cast(next);
+            let last_next = ptr_chain_iter(next).last().unwrap();
+            (*last_next).p_next = self.p_next as _;
+            self.p_next = next_ptr;
+        }
         self
     }
 }
