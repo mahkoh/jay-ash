@@ -5687,6 +5687,10 @@ impl StructureType {
     pub const IMAGE_STENCIL_USAGE_2_CREATE_INFO_KHR: Self = Self(1_000_668_005);
     pub const SHARED_PRESENT_SURFACE_CAPABILITIES_2_KHR: Self = Self(1_000_668_006);
 }
+#[doc = "Generated from 'VK_ARM_cooperative_matrix_layouts'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM: Self = Self(1_000_670_000);
+}
 #[doc = "Generated from 'VK_EXT_shader_ocp_microscaling_types'"]
 impl ComponentTypeKHR {
     pub const FLOAT6_E2M3_EXT: Self = Self(1_000_672_000);
@@ -10432,6 +10436,9 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
 ) -> Bool32;
 pub const KHR_EXTENDED_FLAGS_EXTENSION_NAME: &CStr = c"VK_KHR_extended_flags";
 pub const KHR_EXTENDED_FLAGS_SPEC_VERSION: u32 = 1u32;
+pub const ARM_COOPERATIVE_MATRIX_LAYOUTS_EXTENSION_NAME: &CStr =
+    c"VK_ARM_cooperative_matrix_layouts";
+pub const ARM_COOPERATIVE_MATRIX_LAYOUTS_SPEC_VERSION: u32 = 1u32;
 pub const EXT_SHADER_OCP_MICROSCALING_TYPES_EXTENSION_NAME: &CStr =
     c"VK_EXT_shader_ocp_microscaling_types";
 pub const EXT_SHADER_OCP_MICROSCALING_TYPES_SPEC_VERSION: u32 = 1u32;
