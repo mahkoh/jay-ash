@@ -1228,6 +1228,24 @@ impl AntiLagStageAMD {
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
+#[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkHdrSmpteSt209450PowerPreferenceGOOGLE.html>"]
+pub struct HdrSmpteSt209450PowerPreferenceGOOGLE(pub(crate) i32);
+impl HdrSmpteSt209450PowerPreferenceGOOGLE {
+    #[inline]
+    pub const fn from_raw(x: i32) -> Self {
+        Self(x)
+    }
+    #[inline]
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+}
+impl HdrSmpteSt209450PowerPreferenceGOOGLE {
+    pub const COLOR_ACCURACY: Self = Self(0);
+    pub const LOW_POWER: Self = Self(1);
+}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[repr(transparent)]
 #[doc = "<https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSemaphoreType.html>"]
 pub struct SemaphoreType(pub(crate) i32);
 impl SemaphoreType {
@@ -1957,6 +1975,8 @@ impl VendorId {
     pub const MOBILEYE: Self = Self(0x1_0007);
     #[doc = "Ape vendor ID"]
     pub const APE: Self = Self(0x1_0008);
+    #[doc = "Apex Compute vendor ID"]
+    pub const APEX: Self = Self(0x1_0009);
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]
@@ -2035,6 +2055,12 @@ impl DriverId {
     pub const APE_SOFT: Self = Self(30);
     #[doc = "Reserved for undisclosed driver project"]
     pub const RESERVED_31: Self = Self(31);
+    #[doc = "Apex Compute"]
+    pub const APEX: Self = Self(32);
+    #[doc = "nikki Vulkan-on-WebGPU implementation"]
+    pub const NIKKI: Self = Self(33);
+    #[doc = "momoten Vulkan-on-OpenCL implementation"]
+    pub const MOMOTEN: Self = Self(34);
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]

@@ -1,6 +1,6 @@
 [package]
 name = "jay-ash"
-version = "0.21.0+1.4.365"
+version = "0.22.0+1.4.366"
 authors = [
     "Maik Klein <maikklein@googlemail.com>",
     "Benjamin Saunders <ben.e.saunders@gmail.com>",
