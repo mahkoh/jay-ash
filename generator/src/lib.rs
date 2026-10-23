@@ -1618,7 +1618,21 @@ pub enum EnumType {
     Enum(TokenStream),
 }
 
-static TRAILING_NUMBER: LazyLock<Regex> = LazyLock::new(|| Regex::new("(\\d+)$").unwrap());
+fn strip_prefix_ignoring_underscores<'a>(s: &'a str, prefix: &str) -> Option<&'a str> {
+    let mut p = prefix.bytes().filter(|&b| b != b'_').peekable();
+    for (i, b) in s.bytes().enumerate() {
+        if p.peek().is_none() {
+            return Some(&s[i..]);
+        }
+        if b == b'_' {
+            continue;
+        }
+        if p.next() != Some(b) {
+            return None;
+        }
+    }
+    p.peek().is_none().then_some("")
+}
 
 pub fn variant_ident(enum_name: &str, variant_name: &str) -> Ident {
     let variant_name = variant_name.to_uppercase();
@@ -1674,11 +1688,9 @@ pub fn variant_ident(enum_name: &str, variant_name: &str) -> Ident {
         .cloned()
         .unwrap_or("");
     let struct_name = struct_name.strip_suffix(vendor).unwrap();
-    let struct_name = TRAILING_NUMBER.replace(struct_name, "_$1");
     let variant_name = variant_name.strip_suffix(vendor).unwrap_or(&variant_name);
 
-    let new_variant_name = variant_name
-        .strip_prefix(struct_name.as_ref())
+    let new_variant_name = strip_prefix_ignoring_underscores(variant_name, struct_name)
         .unwrap_or_else(|| {
             if enum_name == "VkResult" {
                 variant_name.strip_prefix("VK").unwrap()
