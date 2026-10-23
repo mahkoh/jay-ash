@@ -12070,6 +12070,14 @@ pub mod google {
             crate::vk::GOOGLE_SURFACELESS_QUERY_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_GOOGLE_hdr_smpte_st_209450_metadata"]
+    pub mod hdr_smpte_st_209450_metadata {
+        use super::super::*;
+        pub use {
+            crate::vk::GOOGLE_HDR_SMPTE_ST_209450_METADATA_EXTENSION_NAME as NAME,
+            crate::vk::GOOGLE_HDR_SMPTE_ST_209450_METADATA_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged HUAWEI"]
 pub mod huawei {
