@@ -2061,6 +2061,8 @@ impl DriverId {
     pub const NIKKI: Self = Self(33);
     #[doc = "momoten Vulkan-on-OpenCL implementation"]
     pub const MOMOTEN: Self = Self(34);
+    #[doc = "Aurora Silicon"]
+    pub const AURORA_BOREALIS: Self = Self(35);
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 #[repr(transparent)]

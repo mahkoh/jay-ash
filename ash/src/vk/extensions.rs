@@ -5735,6 +5735,11 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT: Self = Self(1_000_678_000);
 }
+#[doc = "Generated from 'VK_KHR_maintenance12'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_MAINTENANCE_12_FEATURES_KHR: Self = Self(1_000_680_000);
+    pub const PHYSICAL_DEVICE_MAINTENANCE_12_PROPERTIES_KHR: Self = Self(1_000_680_001);
+}
 #[doc = "Generated from 'VK_EXT_image_tiling_control'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT: Self = Self(1_000_687_000);
@@ -10461,6 +10466,8 @@ pub const EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]
 pub type PFN_vkCmdSetPrimitiveRestartIndexEXT =
     unsafe extern "system" fn(command_buffer: CommandBuffer, primitive_restart_index: u32);
+pub const KHR_MAINTENANCE_12_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance12";
+pub const KHR_MAINTENANCE_12_SPEC_VERSION: u32 = 1u32;
 pub const EXT_IMAGE_TILING_CONTROL_EXTENSION_NAME: &CStr = c"VK_EXT_image_tiling_control";
 pub const EXT_IMAGE_TILING_CONTROL_SPEC_VERSION: u32 = 1u32;
 pub const NV_COOPERATIVE_MATRIX_DECODE_VECTOR_EXTENSION_NAME: &CStr =

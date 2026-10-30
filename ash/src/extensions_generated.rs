@@ -21322,6 +21322,14 @@ pub mod khr {
             crate::vk::KHR_EXTENDED_FLAGS_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_KHR_maintenance12"]
+    pub mod maintenance12 {
+        use super::super::*;
+        pub use {
+            crate::vk::KHR_MAINTENANCE_12_EXTENSION_NAME as NAME,
+            crate::vk::KHR_MAINTENANCE_12_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged LUNARG"]
 pub mod lunarg {
