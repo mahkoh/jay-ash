@@ -5735,6 +5735,11 @@ impl StructureType {
 impl StructureType {
     pub const PHYSICAL_DEVICE_PRIMITIVE_RESTART_INDEX_FEATURES_EXT: Self = Self(1_000_678_000);
 }
+#[doc = "Generated from 'VK_EXT_vertex_address_binding_unrestricted'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_VERTEX_ADDRESS_BINDING_UNRESTRICTED_FEATURES_EXT: Self =
+        Self(1_000_679_000);
+}
 #[doc = "Generated from 'VK_KHR_maintenance12'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_MAINTENANCE_12_FEATURES_KHR: Self = Self(1_000_680_000);
@@ -10445,6 +10450,20 @@ pub type PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC = unsafe extern "syste
     queue_family_index: u32,
     device: *mut ubm_device,
 ) -> Bool32;
+pub const NV_INTERNAL_HANDLE_EXTENSION_NAME: &CStr = c"VK_NV_internal_handle";
+pub const NV_INTERNAL_HANDLE_SPEC_VERSION: u32 = 1u32;
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetPhysicalDeviceInternalHandleNV =
+    unsafe extern "system" fn(physical_device: PhysicalDevice, p_handle: *mut InternalHandleNV);
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetDeviceInternalHandleNV =
+    unsafe extern "system" fn(device: crate::vk::Device, p_handle: *mut InternalHandleNV);
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetQueueInternalHandleNV =
+    unsafe extern "system" fn(queue: Queue, p_handle: *mut InternalHandleNV);
+#[allow(non_camel_case_types)]
+pub type PFN_vkGetCommandBufferInternalHandleNV =
+    unsafe extern "system" fn(command_buffer: CommandBuffer, p_handle: *mut InternalHandleNV);
 pub const KHR_EXTENDED_FLAGS_EXTENSION_NAME: &CStr = c"VK_KHR_extended_flags";
 pub const KHR_EXTENDED_FLAGS_SPEC_VERSION: u32 = 1u32;
 pub const ARM_COOPERATIVE_MATRIX_LAYOUTS_EXTENSION_NAME: &CStr =
@@ -10466,6 +10485,9 @@ pub const EXT_PRIMITIVE_RESTART_INDEX_SPEC_VERSION: u32 = 1u32;
 #[allow(non_camel_case_types)]
 pub type PFN_vkCmdSetPrimitiveRestartIndexEXT =
     unsafe extern "system" fn(command_buffer: CommandBuffer, primitive_restart_index: u32);
+pub const EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_EXTENSION_NAME: &CStr =
+    c"VK_EXT_vertex_address_binding_unrestricted";
+pub const EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_SPEC_VERSION: u32 = 1u32;
 pub const KHR_MAINTENANCE_12_EXTENSION_NAME: &CStr = c"VK_KHR_maintenance12";
 pub const KHR_MAINTENANCE_12_SPEC_VERSION: u32 = 1u32;
 pub const EXT_IMAGE_TILING_CONTROL_EXTENSION_NAME: &CStr = c"VK_EXT_image_tiling_control";

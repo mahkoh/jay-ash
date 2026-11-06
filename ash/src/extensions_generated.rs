@@ -11429,6 +11429,14 @@ pub mod ext {
             }
         }
     }
+    #[doc = "VK_EXT_vertex_address_binding_unrestricted"]
+    pub mod vertex_address_binding_unrestricted {
+        use super::super::*;
+        pub use {
+            crate::vk::EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_EXTENSION_NAME as NAME,
+            crate::vk::EXT_VERTEX_ADDRESS_BINDING_UNRESTRICTED_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
     #[doc = "VK_EXT_image_tiling_control"]
     pub mod image_tiling_control {
         use super::super::*;
@@ -25024,6 +25032,176 @@ pub mod nv {
                             ::core::mem::transmute::<
                                 *const c_void,
                                 PFN_vkCmdSetComputeOccupancyPriorityNV,
+                            >(val)
+                        }
+                    },
+                }
+            }
+        }
+    }
+    #[doc = "VK_NV_internal_handle"]
+    pub mod internal_handle {
+        use super::super::*;
+        pub use {
+            crate::vk::NV_INTERNAL_HANDLE_EXTENSION_NAME as NAME,
+            crate::vk::NV_INTERNAL_HANDLE_SPEC_VERSION as SPEC_VERSION,
+        };
+        #[doc = "VK_NV_internal_handle instance-level functions"]
+        #[derive(Clone)]
+        pub struct Instance {
+            pub(crate) fp: InstanceFn,
+            pub(crate) handle: crate::vk::Instance,
+        }
+        impl Instance {
+            pub fn new(entry: &crate::Entry, instance: &crate::Instance) -> Self {
+                let handle = instance.handle();
+                let fp = InstanceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        entry.get_instance_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &InstanceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn instance(&self) -> crate::vk::Instance {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_NV_internal_handle instance-level function pointers"]
+        pub struct InstanceFn {
+            pub get_physical_device_internal_handle_nv: PFN_vkGetPhysicalDeviceInternalHandleNV,
+        }
+        unsafe impl Send for InstanceFn {}
+        unsafe impl Sync for InstanceFn {}
+        impl InstanceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    get_physical_device_internal_handle_nv: unsafe {
+                        unsafe extern "system" fn get_physical_device_internal_handle_nv(
+                            _physical_device: PhysicalDevice,
+                            _p_handle: *mut InternalHandleNV,
+                        ) {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_physical_device_internal_handle_nv)
+                            ))
+                        }
+                        let val = _f(c"vkGetPhysicalDeviceInternalHandleNV");
+                        if val.is_null() {
+                            get_physical_device_internal_handle_nv
+                        } else {
+                            ::core::mem::transmute::<
+                                *const c_void,
+                                PFN_vkGetPhysicalDeviceInternalHandleNV,
+                            >(val)
+                        }
+                    },
+                }
+            }
+        }
+        #[doc = "VK_NV_internal_handle device-level functions"]
+        #[derive(Clone)]
+        pub struct Device {
+            pub(crate) fp: DeviceFn,
+            pub(crate) handle: crate::vk::Device,
+        }
+        impl Device {
+            pub fn new(instance: &crate::Instance, device: &crate::Device) -> Self {
+                let handle = device.handle();
+                let fp = DeviceFn::load(|name| unsafe {
+                    core::mem::transmute::<PFN_vkVoidFunction, *const c_void>(
+                        instance.get_device_proc_addr(handle, name.as_ptr()),
+                    )
+                });
+                Self { handle, fp }
+            }
+            #[inline]
+            pub fn fp(&self) -> &DeviceFn {
+                &self.fp
+            }
+            #[inline]
+            pub fn device(&self) -> crate::vk::Device {
+                self.handle
+            }
+        }
+        #[derive(Clone)]
+        #[doc = "Raw VK_NV_internal_handle device-level function pointers"]
+        pub struct DeviceFn {
+            pub get_device_internal_handle_nv: PFN_vkGetDeviceInternalHandleNV,
+            pub get_queue_internal_handle_nv: PFN_vkGetQueueInternalHandleNV,
+            pub get_command_buffer_internal_handle_nv: PFN_vkGetCommandBufferInternalHandleNV,
+        }
+        unsafe impl Send for DeviceFn {}
+        unsafe impl Sync for DeviceFn {}
+        impl DeviceFn {
+            pub fn load<F: FnMut(&CStr) -> *const c_void>(mut f: F) -> Self {
+                Self::load_erased(&mut f)
+            }
+            fn load_erased(_f: &mut dyn FnMut(&CStr) -> *const c_void) -> Self {
+                Self {
+                    get_device_internal_handle_nv: unsafe {
+                        unsafe extern "system" fn get_device_internal_handle_nv(
+                            _device: crate::vk::Device,
+                            _p_handle: *mut InternalHandleNV,
+                        ) {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_device_internal_handle_nv)
+                            ))
+                        }
+                        let val = _f(c"vkGetDeviceInternalHandleNV");
+                        if val.is_null() {
+                            get_device_internal_handle_nv
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkGetDeviceInternalHandleNV>(
+                                val,
+                            )
+                        }
+                    },
+                    get_queue_internal_handle_nv: unsafe {
+                        unsafe extern "system" fn get_queue_internal_handle_nv(
+                            _queue: Queue,
+                            _p_handle: *mut InternalHandleNV,
+                        ) {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_queue_internal_handle_nv)
+                            ))
+                        }
+                        let val = _f(c"vkGetQueueInternalHandleNV");
+                        if val.is_null() {
+                            get_queue_internal_handle_nv
+                        } else {
+                            ::core::mem::transmute::<*const c_void, PFN_vkGetQueueInternalHandleNV>(
+                                val,
+                            )
+                        }
+                    },
+                    get_command_buffer_internal_handle_nv: unsafe {
+                        unsafe extern "system" fn get_command_buffer_internal_handle_nv(
+                            _command_buffer: CommandBuffer,
+                            _p_handle: *mut InternalHandleNV,
+                        ) {
+                            panic!(concat!(
+                                "Unable to load ",
+                                stringify!(get_command_buffer_internal_handle_nv)
+                            ))
+                        }
+                        let val = _f(c"vkGetCommandBufferInternalHandleNV");
+                        if val.is_null() {
+                            get_command_buffer_internal_handle_nv
+                        } else {
+                            ::core::mem::transmute::<
+                                *const c_void,
+                                PFN_vkGetCommandBufferInternalHandleNV,
                             >(val)
                         }
                     },
