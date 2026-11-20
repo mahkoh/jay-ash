@@ -5589,6 +5589,20 @@ impl StructureType {
     pub const COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV: Self = Self(1_000_645_000);
     pub const PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV: Self = Self(1_000_645_001);
 }
+#[doc = "Generated from 'VK_AMDX_multi_level_acceleration_structure'"]
+impl AccelerationStructureTypeKHR {
+    pub const MID_LEVEL_AMDX: Self = Self(1_000_648_000);
+}
+#[doc = "Generated from 'VK_AMDX_multi_level_acceleration_structure'"]
+impl PipelineCreateFlags2 {
+    pub const RAY_TRACING_ALLOW_MULTI_LEVEL_ACCELERATION_STRUCTURES_AMDX: Self =
+        Self(0b1000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000);
+}
+#[doc = "Generated from 'VK_AMDX_multi_level_acceleration_structure'"]
+impl StructureType {
+    pub const PHYSICAL_DEVICE_MULTI_LEVEL_ACCELERATION_STRUCTURE_FEATURES_AMDX: Self =
+        Self(1_000_648_000);
+}
 #[doc = "Generated from 'VK_KHR_pipeline_library_group_handles'"]
 impl StructureType {
     pub const PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_KHR: Self =
@@ -10416,6 +10430,9 @@ pub type PFN_vkCmdSetComputeOccupancyPriorityNV = unsafe extern "system" fn(
     command_buffer: CommandBuffer,
     p_parameters: *const ComputeOccupancyPriorityParametersNV<'_>,
 );
+pub const AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_EXTENSION_NAME: &CStr =
+    c"VK_AMDX_multi_level_acceleration_structure";
+pub const AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_SPEC_VERSION: u32 = 1u32;
 pub const KHR_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION_NAME: &CStr =
     c"VK_KHR_pipeline_library_group_handles";
 pub const KHR_PIPELINE_LIBRARY_GROUP_HANDLES_SPEC_VERSION: u32 = 1u32;

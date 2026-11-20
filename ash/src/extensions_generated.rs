@@ -1039,6 +1039,14 @@ pub mod amdx {
             crate::vk::AMDX_DENSE_GEOMETRY_FORMAT_SPEC_VERSION as SPEC_VERSION,
         };
     }
+    #[doc = "VK_AMDX_multi_level_acceleration_structure"]
+    pub mod multi_level_acceleration_structure {
+        use super::super::*;
+        pub use {
+            crate::vk::AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_EXTENSION_NAME as NAME,
+            crate::vk::AMDX_MULTI_LEVEL_ACCELERATION_STRUCTURE_SPEC_VERSION as SPEC_VERSION,
+        };
+    }
 }
 #[doc = "Extensions tagged ANDROID"]
 pub mod android {
