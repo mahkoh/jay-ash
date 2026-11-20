@@ -340,7 +340,7 @@ dependencies = [
 
 [[package]]
 name = "jay-ash"
-version = "0.24.0+1.4.368"
+version = "0.25.0+1.4.369"
 dependencies = [
  "libloading 0.9.0",
 ]
